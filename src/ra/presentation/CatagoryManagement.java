@@ -28,7 +28,7 @@ public class CatagoryManagement {
                     break;
                 case 2:
                     System.out.println("2. Hiển thị danh sách theo tên A–Z");
-                   Write_ReadCategory.writeCategoryToFile(categories,"category.txt");
+                 //  Write_ReadCategory.writeCategoryToFile(categories,"category.txt");
                     Write_ReadCategory.readObjectFromFile(categories,"category.txt");
                     break;
                 case 3:

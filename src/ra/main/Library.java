@@ -11,12 +11,12 @@ import java.util.Scanner;
 
 public class Library {
     public static List<Category> categories=new ArrayList<>();
-    static {
-        categories.add(new Category(1,"Sach lop 1",true));
-        categories.add(new Category(2,"Sach lop 2",false));
-        categories.add(new Category(3,"Sach lop 3",true));
-
-    }
+//    static {
+//        categories.add(new Category(1,"Sach lop 1",true));
+//        categories.add(new Category(2,"Sach lop 2",false));
+//        categories.add(new Category(3,"Sach lop 3",true));
+//
+//    }
     public static List<Book> books= new ArrayList<>();
     public static void main(String[] args) {
         Scanner scanner=new Scanner(System.in);

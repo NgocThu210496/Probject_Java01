@@ -2,6 +2,9 @@ package ra.entity;
 
 import ra.bussiness.IEntity;
 
+import java.util.List;
+import java.util.Scanner;
+
 public class Book implements IEntity {
     private String bookId;
     private String bookTitle;
@@ -80,15 +83,78 @@ public class Book implements IEntity {
         this.categoryId = categoryId;
     }
 
-    @Override
-    public void input() {
+    public void inputDataBook(Scanner scanner, List<Category> categoryList, List<Book> bookList) {
+        scanner = new Scanner(System.in);
+        System.out.println("------------------Nhập thông tin sách: -----------------");
+        boolean isExit = true;
+        System.out.println("Nhập mã sách: ");//(bắt đầu bằng “B”, độ dài 4 kí tự, duy nhất)
+        do {
+            String bookIdInput = scanner.nextLine();
+            if (bookIdInput != null || bookIdInput.trim().length() != 0) {
+                this.bookId = scanner.nextLine();
+                if (this.bookId.length() == 4) {
+                    if (this.bookId.startsWith("B")) {
+                        boolean isExist = false;
+                        for (int i = 0; i < bookList.size(); i++) {
+                            if (bookList.get(i).equals(getBookId())) {
+                                isExist = true;
+                                System.out.println("Mã sách đã tồn tại. Vui lòng nhập lại");
+                                break;
+                            }
+                        }
+                        if (!isExist) {
+                            break;
+                        }
+                    } else {
+                        System.out.println("Mã sách phải bắt đầu bằng 'B'. Vui lòng nhập lại!");
+                    }
 
+                } else {
+                    System.err.println("Mã sách phải có độ dài 4 ký tự. Vui lòng nhập lại!");
+                }
+            } else {
+                System.err.println("Mã sách không được để trống. Vui lòng nhập lại!");
+            }
+        } while (isExit);
+
+        System.out.println("Nhập tiêu đề sách: "); //Tiêu đề sách (từ 6-50 kí tự, duy nhất)
+        do {
+            String bookTitleInput = scanner.nextLine();
+            if (bookTitleInput != null || bookTitleInput.trim().length() != 0) {
+                this.bookTitle = scanner.nextLine();
+                if (this.bookTitle.length() >= 6 && this.bookTitle.length() <= 50) {
+                    boolean isExist = false;
+                    for (int i = 0; i < bookList.size(); i++) {
+                        if (bookList.get(i).equals(getBookTitle())) {
+                            isExist = true;
+                            System.out.println("Tiêu đề sách đã tồn tại. Vui lòng nhập lại");
+                            break;
+                        }
+                    }
+                    if (!isExist) {
+                        break;
+                    }
+                } else {
+                    System.err.println("Tiêu đề sách phải có độ dài từ 6-50 ký tự. Vui lòng nhập lại!");
+                }
+            } else {
+                System.err.println("Tiêu đề sách không được để trống. Vui lòng nhập lại!");
+            }
+        } while (isExit);
+
+        System.out.println("Nhập tên tác giả: "); //Tên tác giả (không bỏ trống)
+        do {
+            this.author = scanner.nextLine();
+        }
+        while (this.author.isEmpty());  //kiểm tra chuỗi rỗng hoặc không rỗng
+
+        //Nhà xuất bản (không bỏ trống)
 
     }
 
     @Override
     public void output() {
-        System.out.printf("Mã sách: %s - Tiêu đề: %s - Tác giả: %s\n",this.bookId,this.bookTitle, this.author);
-        System.out.printf("NXB: %s - Năm xuất bản: %d - Thể loại: %",this.publisher, this.year, this.categoryId);
+        System.out.printf("Mã sách: %s - Tiêu đề: %s - Tác giả: %s\n", this.bookId, this.bookTitle, this.author);
+        System.out.printf("NXB: %s - Năm xuất bản: %d - Thể loại: %", this.publisher, this.year, this.categoryId);
     }
 }
