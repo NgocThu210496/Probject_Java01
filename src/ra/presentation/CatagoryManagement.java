@@ -1,7 +1,6 @@
 package ra.presentation;
 
-import ra.entity.Category;
-import ra.write_ReadObject.Write_ReadCategory;
+import ra.bussiness.entity.Category;
 
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +28,7 @@ public class CatagoryManagement {
                 case 2:
                     System.out.println("2. Hiển thị danh sách theo tên A–Z");
                  //  Write_ReadCategory.writeCategoryToFile(categories,"category.txt");
-                    Write_ReadCategory.readObjectFromFile(categories,"category.txt");
+
                     break;
                 case 3:
                     System.out.println("3. Thống kê thể loại và số sách có trong mỗi thể loại");

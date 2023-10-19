@@ -1,4 +1,4 @@
-package ra.bussiness;
+package ra.bussiness.design;
 
 public interface IEntity <T>{
     void output();

@@ -1,16 +1,18 @@
-package ra.entity;
+package ra.bussiness.entity;
 
-import ra.bussiness.IEntity;
+import ra.bussiness.design.IEntity;
 
+import java.io.Serializable;
+import java.time.Year;
 import java.util.List;
 import java.util.Scanner;
 
-public class Book implements IEntity {
+public class Book implements IEntity, Serializable {
     private String bookId;
     private String bookTitle;
     private String author; //Tên tác giả
     private String publisher; //Nhà xuất bản
-    private int year;//Năm xuất bản (tối thiểu từ năm 1970 và không lớn hơn năm hiện tại)
+    private int year;//Năm xuất bản
     private String description;
     private int categoryId; //Mã thể loại sách (phải lấy từ danh sách Thể loại sách đã lưu trước đó)
 
@@ -87,6 +89,7 @@ public class Book implements IEntity {
         scanner = new Scanner(System.in);
         System.out.println("------------------Nhập thông tin sách: -----------------");
         boolean isExit = true;
+
         System.out.println("Nhập mã sách: ");//(bắt đầu bằng “B”, độ dài 4 kí tự, duy nhất)
         do {
             String bookIdInput = scanner.nextLine();
@@ -144,17 +147,90 @@ public class Book implements IEntity {
 
         System.out.println("Nhập tên tác giả: "); //Tên tác giả (không bỏ trống)
         do {
-            this.author = scanner.nextLine();
+            String authorInput = scanner.nextLine();
+            if (authorInput != null || authorInput.trim().length() != 0) {
+                this.author = authorInput;
+                break;// Khi đã nhập đúng giá trị
+            } else {
+                System.err.println("Tên tác giả không được để trống. Vui lòng nhập lại!");
+            }
         }
-        while (this.author.isEmpty());  //kiểm tra chuỗi rỗng hoặc không rỗng
+        while (isExit);
 
-        //Nhà xuất bản (không bỏ trống)
+        System.out.println("Nhập nhà xuất bản: "); //Nhà xuất bản (không bỏ trống)
+        do {
+            String publisherInput = scanner.nextLine();
+            if (publisherInput != null || publisherInput.trim().length() != 0) {
+                this.publisher = publisherInput;
+                break;
+            } else {
+                System.err.println("Nhà xuất bản không được để trống. Vui lòng nhập lại!");
+            }
+        }
+        while (isExit);
+
+        System.out.println("Nhập năm xuất bản: "); //(tối thiểu từ năm 1970 và không lớn hơn năm hiện tại)
+        do {
+            String yearInput = scanner.nextLine();
+            if (yearInput != null || yearInput.trim().length() != 0) {
+                try {
+                    this.year = Integer.parseInt(yearInput); //ep kieu String ->int
+                    Year publicationYear = Year.of(year); //tạo đối tượng Year với giá trị năm là year để ktra năm XB
+                    Year currentYear = Year.now(); //năm hiện
+                    if (publicationYear.isAfter(Year.of(1970)) && !publicationYear.isAfter(currentYear)) {
+                        break;
+                    } else {
+                        System.err.println("Năm xuất bản phải từ 1970 trở đi và không lớn hơn năm hiện tại.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.err.println("Năm xuất bản phải là một số nguyên.");
+                }
+            } else {
+                System.err.println("Năm xuất bản không được để trống. Vui lòng nhập lại!");
+            }
+        } while (isExit);
+
+        System.out.println("Nhập mô tả sách: "); //(không bỏ trống)
+        do {
+            String descriptionInput = scanner.nextLine();
+            if (descriptionInput != null || descriptionInput.trim().isEmpty()) {
+                this.description = descriptionInput;
+                break;
+            } else {
+                System.err.println("Mô tả sách không được để trống. Vui lòng nhập lại!");
+            }
+        } while (isExit);
+
+        System.out.println("Chọn danh mục của sản phẩm: "); //hiển thị ra các danh mục
+        do {
+            for (int i = 0; i < categoryList.size(); i++) {
+                System.out.println(i + 1 + "." + categoryList.get(i).getCategoryName());
+            }
+            System.out.println("Lựa chọn của bạn");
+            String choiceInput = scanner.nextLine();
+            if (!choiceInput.isEmpty()) { // Kiểm tra lựa chọn không trống
+                try {
+                    int choice = Integer.parseInt(scanner.nextLine()); //người dùng nhập để chọn một danh mục từ danh sách
+                    if (choice > 1 || choice <= categoryList.size()) {
+                        System.err.println("Không tồn tại mã danh mục, vui lòng nhập lại!");
+                    } else {
+                        this.categoryId = categoryList.get(choice - 1).getCategoryId(); //truy cập phần tử thứ (choice - 1)
+                        break;
+                    }
+                } catch (NumberFormatException e) {
+                    System.err.println("Lựa chọn phải là một số nguyên. Vui lòng nhập lại!");
+                }
+            } else {
+                System.err.println("Lựa chọn không được để trống. Vui lòng nhập lại!");
+            }
+
+        } while (isExit);
 
     }
 
     @Override
     public void output() {
         System.out.printf("Mã sách: %s - Tiêu đề: %s - Tác giả: %s\n", this.bookId, this.bookTitle, this.author);
-        System.out.printf("NXB: %s - Năm xuất bản: %d - Thể loại: %", this.publisher, this.year, this.categoryId);
+        System.out.printf("NXB: %s - Năm xuất bản: %d - Mô tả sách: %s - Danh mục của sản phẩm: %", this.publisher, this.year, this.description, this.categoryId);
     }
 }

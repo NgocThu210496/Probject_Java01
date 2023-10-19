@@ -1,9 +1,8 @@
-package ra.entity;
+package ra.bussiness.entity;
 
-import ra.bussiness.IEntity;
+import ra.bussiness.design.IEntity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -56,7 +55,7 @@ public class Category implements IEntity, Serializable {
             String categoryIdInput=scanner.nextLine();
             if(categoryIdInput!=null || categoryIdInput.trim().length()!=0){
                 try{
-                    this.categoryId = Integer.parseInt(scanner.nextLine());
+                    this.categoryId = Integer.parseInt(categoryIdInput); //chuyển đổi chuỗi thành một số nguyên.
                     if (this.categoryId > 0) {
                         boolean isExist = false; //id đã tồn tại hay chưa
                         for (Category ct : categoryList) {
@@ -73,7 +72,7 @@ public class Category implements IEntity, Serializable {
                         System.err.println("Mã thể loại phải lớn hơn 0. Vui lòng nhập lại!");
                     }
                 }catch (NumberFormatException e){
-                    System.err.println("Mã thể loại không hợp lê. Vui lòng nhập lại!");
+                    System.err.println("Mã thể loại phải là số nguyên. Vui lòng nhập lại!");
                 }
             }else {
                 System.err.println("Mã thể loại không được để trống. Vui lòng nhập lại!");
