@@ -93,7 +93,7 @@ public class Book implements IEntity, Serializable {
         System.out.println("Nhập mã sách: ");//(bắt đầu bằng “B”, độ dài 4 kí tự, duy nhất)
         do {
             String bookIdInput = scanner.nextLine();
-            if (bookIdInput != null || bookIdInput.trim().length() != 0) {
+            if (bookIdInput != null && !bookIdInput.trim().isEmpty()) {
                 this.bookId = scanner.nextLine();
                 if (this.bookId.length() == 4) {
                     if (this.bookId.startsWith("B")) {
@@ -123,7 +123,7 @@ public class Book implements IEntity, Serializable {
         System.out.println("Nhập tiêu đề sách: "); //Tiêu đề sách (từ 6-50 kí tự, duy nhất)
         do {
             String bookTitleInput = scanner.nextLine();
-            if (bookTitleInput != null || bookTitleInput.trim().length() != 0) {
+            if (bookTitleInput != null && !bookTitleInput.trim().isEmpty()) {
                 this.bookTitle = scanner.nextLine();
                 if (this.bookTitle.length() >= 6 && this.bookTitle.length() <= 50) {
                     boolean isExist = false;
@@ -148,7 +148,7 @@ public class Book implements IEntity, Serializable {
         System.out.println("Nhập tên tác giả: "); //Tên tác giả (không bỏ trống)
         do {
             String authorInput = scanner.nextLine();
-            if (authorInput != null || authorInput.trim().length() != 0) {
+            if (authorInput != null && !authorInput.trim().isEmpty()) {
                 this.author = authorInput;
                 break;// Khi đã nhập đúng giá trị
             } else {
@@ -172,7 +172,7 @@ public class Book implements IEntity, Serializable {
         System.out.println("Nhập năm xuất bản: "); //(tối thiểu từ năm 1970 và không lớn hơn năm hiện tại)
         do {
             String yearInput = scanner.nextLine();
-            if (yearInput != null || yearInput.trim().length() != 0) {
+            if (yearInput != null && !yearInput.trim().isEmpty()) {
                 try {
                     this.year = Integer.parseInt(yearInput); //ep kieu String ->int
                     Year publicationYear = Year.of(year); //tạo đối tượng Year với giá trị năm là year để ktra năm XB
@@ -193,7 +193,7 @@ public class Book implements IEntity, Serializable {
         System.out.println("Nhập mô tả sách: "); //(không bỏ trống)
         do {
             String descriptionInput = scanner.nextLine();
-            if (descriptionInput != null || descriptionInput.trim().isEmpty()) {
+            if (descriptionInput != null && !descriptionInput.trim().isEmpty()) {
                 this.description = descriptionInput;
                 break;
             } else {

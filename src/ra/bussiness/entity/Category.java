@@ -53,7 +53,7 @@ public class Category implements IEntity, Serializable {
         System.out.println("Nhập vào mã thể loại: "); //(số nguyên lớn hơn 0, duy nhất)
         do {
             String categoryIdInput=scanner.nextLine();
-            if(categoryIdInput!=null || categoryIdInput.trim().length()!=0){
+            if(categoryIdInput!=null && !categoryIdInput.trim().isEmpty()){
                 try{
                     this.categoryId = Integer.parseInt(categoryIdInput); //chuyển đổi chuỗi thành một số nguyên.
                     if (this.categoryId > 0) {
@@ -84,9 +84,9 @@ public class Category implements IEntity, Serializable {
         System.out.println("Nhập tên thể loại: ");
         do {
             String categoryNameInput=scanner.nextLine();
-            if(categoryNameInput!=null || categoryNameInput.trim().length()!=0){
-                this.categoryName = scanner.nextLine();
-                if (categoryName.length() >= 6 && categoryName.length() <= 30) {
+            if(categoryNameInput!=null && !categoryNameInput.trim().isEmpty()){
+                this.categoryName = categoryNameInput;
+                if (this.categoryName.length() >= 6 && this.categoryName.length() <= 30) {
                     boolean isExist = false;
                     for (int i = 0; i < categoryList.size(); i++) {
                         if (categoryList.get(i).categoryName.equals(getCategoryName())) {
@@ -108,8 +108,8 @@ public class Category implements IEntity, Serializable {
 
         System.out.println("Nhập vào trạng thái thể loại (true/false):");
         do {
-            String statusInput=scanner.nextLine().toLowerCase(); // Chuyển thành chữ thường
-            if(statusInput!=null || statusInput.trim().length()!=0){
+            String statusInput=scanner.nextLine().trim(); // Chuyển thành chữ thường và bỏ khoảng trắng
+            if(!statusInput.isEmpty()){
                 if(statusInput.equals("true") || statusInput.equals("false")){
                     this.categoryStatus=Boolean.parseBoolean(statusInput);
                     break;
@@ -125,7 +125,7 @@ public class Category implements IEntity, Serializable {
 
     @Override
     public void output() {
-        System.out.printf("Mã thể loại sách: %d - Tên thể loại: %s - Trạng thái thể loại: %b", this.categoryId, this.categoryName, this.isCategoryStatus() ? "Hoạt động" : "Không hoạt động");
+        System.out.printf("Mã thể loại sách: %d - Tên thể loại: %s - Trạng thái thể loại: %s\n", this.categoryId, this.categoryName, this.categoryStatus ? "Hoạt động" : "Không hoạt động");
         System.out.println("-------------------------*-----------------------------");
     }
 }
