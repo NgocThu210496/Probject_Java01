@@ -1,5 +1,6 @@
 package ra.bussiness.impl;
 
+import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
 import ra.writeRead_File.WriteReadCategory;
 
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CatalogImp {
-    public static boolean createCatalog(Scanner scanner, List<Category> categoryList) {
+    public static boolean createCatalog(Scanner scanner, List<Category> categoryList, List<Book> bookList) {
         scanner = new Scanner(System.in);
         System.out.println("Nhập vào số thể loai cần thêm mới");
         int n = Integer.parseInt(scanner.nextLine());
@@ -22,7 +23,7 @@ public class CatalogImp {
         }
         if (addedSuccessfully) {
             //ghi danh sach danh muc vao file .txt
-            boolean result = WriteReadCategory.writeCategoryToFile(categoryList);
+            boolean result = WriteReadCategory.writeCategoryToFile(categoryList,bookList);
             if (result) {
                 System.out.println("Đã thêm danh mục thành công và lưu vào file");
             } else {

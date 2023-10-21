@@ -2,6 +2,7 @@ package ra.bussiness.impl;
 
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
+import ra.writeRead_File.WriteReadBook;
 
 import java.util.List;
 import java.util.Scanner;
@@ -21,7 +22,17 @@ public class BookImp {
         }
         if(addedSuccessfuly){
             //luu vao file .txt
-           // boolean result=
+            boolean result= WriteReadBook.writeBookToFile(bookList, categoryList);
+            if(result){
+                System.out.println("Đã thêm sách thành công và lưu vào file");
+            }else {
+                System.err.println("Không thể lưu dữ liệu vào file.");
+            }
+        }
+    }
+    public static void displayBooks(List<Category> categoryList,List<Book> bookList) {
+        for (Book book : bookList) {
+            book.output();
         }
     }
 }

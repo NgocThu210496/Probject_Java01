@@ -1,12 +1,22 @@
 package ra.presentation;
 
+import ra.bussiness.entity.Book;
+import ra.bussiness.entity.Category;
+import ra.bussiness.impl.BookImp;
+import ra.writeRead_File.WriteReadBook;
+import ra.writeRead_File.WriteReadCategory;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class BookManagement {
 
-    public static void showBooksMenu(){
-        Scanner scanner= new Scanner(System.in);
-        boolean exitMenuBook=true;
+    public static void showBooksMenu(List<Category> categoryList, List<Book> bookList) {
+        Scanner scanner = new Scanner(System.in);
+        bookList = WriteReadBook.readBookFromFile();
+        bookList = (bookList != null) ? bookList : new ArrayList<>();
+        boolean exitMenuBook = true;
         do {
             System.out.println("==============QUẢN LÝ SÁCH==============");
             System.out.println("1. Thêm mới sách");
@@ -19,9 +29,10 @@ public class BookManagement {
             System.out.println("Nhập lựa chọn của bạn: ");
             int choice = Integer.parseInt(scanner.next());
 
-            switch (choice){
+            switch (choice) {
                 case 1:
                     System.out.println("1. Thêm mới thể loại");
+                    BookImp.createBook(scanner, categoryList, bookList);
                     break;
                 case 2:
                     System.out.println("2. Hiển thị danh sách theo tên A–Z");
@@ -36,12 +47,12 @@ public class BookManagement {
                     System.out.println("5. Xóa thể loại");
                     break;
                 case 6:
-                    exitMenuBook=false;
+                    exitMenuBook = false;
                     break;
                 default:
                     System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại!");
             }
 
-        }while (exitMenuBook);
+        } while (exitMenuBook);
     }
 }

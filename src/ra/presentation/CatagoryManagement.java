@@ -1,17 +1,20 @@
 package ra.presentation;
 
+import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
 import ra.bussiness.impl.CatalogImp;
 import ra.writeRead_File.WriteReadCategory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class CatagoryManagement {
-    public static void showCategoriesMenu(List<Category> categoryList){
-        Scanner scanner= new Scanner(System.in);
+    public static void showCategoriesMenu(List<Category> categoryList, List<Book> bookList) {
+        Scanner scanner = new Scanner(System.in);
         categoryList = WriteReadCategory.readCategoryFromFile();
-        boolean exitMenuCatagory=true;
+        categoryList = (categoryList != null) ? categoryList : new ArrayList<>();
+        boolean exitMenuCatagory = true;
         do {
             System.out.println("==============QUẢN LÝ THỂ LOẠI ==============");
             System.out.println("1. Thêm mới thể loại");
@@ -24,10 +27,10 @@ public class CatagoryManagement {
             System.out.println("Nhập lựa chọn của bạn: ");
             int choice = Integer.parseInt(scanner.next());
 
-            switch (choice){
+            switch (choice) {
                 case 1:
                     System.out.println("1. Thêm mới thể loại");
-                    CatalogImp.createCatalog(scanner,categoryList);
+                    CatalogImp.createCatalog(scanner, categoryList, bookList);
                     break;
                 case 2:
                     System.out.println("2. Hiển thị danh sách theo tên A–Z");
@@ -44,12 +47,12 @@ public class CatagoryManagement {
                     System.out.println("5. Xóa thể loại");
                     break;
                 case 6:
-                    exitMenuCatagory=false;
+                    exitMenuCatagory = false;
                     break;
                 default:
                     System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại!");
             }
 
-        }while (exitMenuCatagory);
+        } while (exitMenuCatagory);
     }
 }

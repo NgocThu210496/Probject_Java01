@@ -17,7 +17,14 @@ public class Library {
 //        categoriesList.add(new Category(3,"Sach lop 3",true));
 //
 //    }
-    public static List<Book> books= new ArrayList<>();
+    public static List<Book> bookList= new ArrayList<>();
+    static {
+        bookList.add(new Book("Bs01","Sách Địa lý","Nguyễn van A", "Hoa sen",1996,"Sách cho học sinh",1));
+        bookList.add(new Book("Bs02","Sách Lịch sử","Nguyễn van B", "Hoa sen",1991,"Sách cho học sinh",2));
+        bookList.add(new Book("Bs02","Sách Công nghệ thông tin","Nguyễn van C", "Hoa sen",1992,"Sách cho học sinh",3));
+    }
+
+
     public static void main(String[] args) {
        // WriteReadCategory.writeCategoryToFile(categoriesList);
 
@@ -34,11 +41,11 @@ public class Library {
             switch (choice){
                 case 1:
                     System.out.println("1. Quản lý Thể loại");
-                    CatagoryManagement.showCategoriesMenu(categoriesList);
+                    CatagoryManagement.showCategoriesMenu(categoriesList,bookList);
                     break;
                 case 2:
                     System.out.println("2. Quản lý Sách");
-                    BookManagement.showBooksMenu();
+                    BookManagement.showBooksMenu(categoriesList,bookList);
                     break;
                 case 3:
                     System.exit(0);
