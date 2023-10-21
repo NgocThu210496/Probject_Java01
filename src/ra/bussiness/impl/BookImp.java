@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class BookImp {
     public static void createBook(Scanner scanner, List<Category> categoryList, List<Book> bookList){
         scanner=new Scanner(System.in);
-        System.out.println("Nhập vào số sách cần thêm mới' ");
+        System.out.print("Nhập vào số sách cần thêm mới' ");
         int n=Integer.parseInt(scanner.nextLine());
         boolean addedSuccessfuly=false; // kiem tra da them thanh cong hay chua?
         for(int i=0;i<n;i++){
@@ -30,9 +30,5 @@ public class BookImp {
             }
         }
     }
-    public static void displayBooks(List<Category> categoryList,List<Book> bookList) {
-        for (Book book : bookList) {
-            book.output();
-        }
-    }
+
 }

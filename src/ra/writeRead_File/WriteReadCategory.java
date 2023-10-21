@@ -61,11 +61,7 @@ public class WriteReadCategory {
             //3. doc cac doi tuong tu file
             //tao bien de luu
             categoriesList = (List<Category>) ois.readObject(); //vi no dang kieu object nen phai add  sang kieu data category
-            // in ra
-            System.out.println("Danh sách danh mục đọc ra từ file:  ");
-            for (Category ct : categoriesList) {
-                ct.output();
-            }
+
         } catch (IOException ex) {
             System.err.println("Có lỗi khi đọc hoặc ghi dữ liệu từ tệp: " + ex.getMessage());
         }

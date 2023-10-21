@@ -51,9 +51,7 @@ public class WriteReadBook {
             }
             //doc cac doi tuon gtu file va luu vao list
             bookList=(List<Book>)ois.readObject();
-            for (Book book:bookList) {
-                book.output();
-            }
+
         }catch (IOException ex){
             System.err.println("Có lỗi khi đọc hoặc ghi dữ liệu từ tệp: " + ex.getMessage());
         } catch (ClassNotFoundException ex2) {

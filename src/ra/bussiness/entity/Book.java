@@ -90,18 +90,17 @@ public class Book implements IEntity, Serializable {
         System.out.println("------------------Nhập thông tin sách: -----------------");
         boolean isExit = true;
 
-        System.out.println("Nhập mã sách: ");//(bắt đầu bằng “B”, độ dài 4 kí tự, duy nhất)
+        System.out.print("Nhập mã sách: ");//(bắt đầu bằng “B”, độ dài 4 kí tự, duy nhất)
         do {
-            String bookIdInput = scanner.nextLine();
-            if (bookIdInput != null && !bookIdInput.trim().isEmpty()) {
-                this.bookId = scanner.nextLine();
+            this.bookId = scanner.nextLine();
+            if (this.bookId != null && !this.bookId.trim().isEmpty()) {
                 if (this.bookId.length() == 4) {
                     if (this.bookId.startsWith("B")) {
                         boolean isExist = false;
                         for (int i = 0; i < bookList.size(); i++) {
-                            if (bookList.get(i).equals(getBookId())) {
+                            if (bookList.get(i).getBookId().equals(getBookId())) {
                                 isExist = true;
-                                System.out.println("Mã sách đã tồn tại. Vui lòng nhập lại");
+                                System.err.println("Mã sách đã tồn tại. Vui lòng nhập lại");
                                 break;
                             }
                         }
@@ -109,7 +108,7 @@ public class Book implements IEntity, Serializable {
                             break;
                         }
                     } else {
-                        System.out.println("Mã sách phải bắt đầu bằng 'B'. Vui lòng nhập lại!");
+                        System.err.println("Mã sách phải bắt đầu bằng 'B'. Vui lòng nhập lại!");
                     }
 
                 } else {
@@ -120,15 +119,14 @@ public class Book implements IEntity, Serializable {
             }
         } while (isExit);
 
-        System.out.println("Nhập tiêu đề sách: "); //Tiêu đề sách (từ 6-50 kí tự, duy nhất)
+        System.out.print("Nhập tiêu đề sách: "); //Tiêu đề sách (từ 6-50 kí tự, duy nhất)
         do {
-            String bookTitleInput = scanner.nextLine();
-            if (bookTitleInput != null && !bookTitleInput.trim().isEmpty()) {
                 this.bookTitle = scanner.nextLine();
+            if (this.bookTitle != null && !this.bookTitle.trim().isEmpty()) {
                 if (this.bookTitle.length() >= 6 && this.bookTitle.length() <= 50) {
                     boolean isExist = false;
                     for (int i = 0; i < bookList.size(); i++) {
-                        if (bookList.get(i).equals(getBookTitle())) {
+                        if (bookList.get(i).getBookTitle().equals(getBookTitle())) {
                             isExist = true;
                             System.out.println("Tiêu đề sách đã tồn tại. Vui lòng nhập lại");
                             break;
@@ -145,7 +143,7 @@ public class Book implements IEntity, Serializable {
             }
         } while (isExit);
 
-        System.out.println("Nhập tên tác giả: "); //Tên tác giả (không bỏ trống)
+        System.out.print("Nhập tên tác giả: "); //Tên tác giả (không bỏ trống)
         do {
             String authorInput = scanner.nextLine();
             if (authorInput != null && !authorInput.trim().isEmpty()) {
@@ -157,10 +155,10 @@ public class Book implements IEntity, Serializable {
         }
         while (isExit);
 
-        System.out.println("Nhập nhà xuất bản: "); //Nhà xuất bản (không bỏ trống)
+        System.out.print("Nhập nhà xuất bản: "); //Nhà xuất bản (không bỏ trống)
         do {
             String publisherInput = scanner.nextLine();
-            if (publisherInput != null || publisherInput.trim().length() != 0) {
+            if (publisherInput != null && !publisherInput.trim().isEmpty()) {
                 this.publisher = publisherInput;
                 break;
             } else {
@@ -169,7 +167,7 @@ public class Book implements IEntity, Serializable {
         }
         while (isExit);
 
-        System.out.println("Nhập năm xuất bản: "); //(tối thiểu từ năm 1970 và không lớn hơn năm hiện tại)
+        System.out.print("Nhập năm xuất bản: "); //(tối thiểu từ năm 1970 và không lớn hơn năm hiện tại)
         do {
             String yearInput = scanner.nextLine();
             if (yearInput != null && !yearInput.trim().isEmpty()) {
@@ -190,7 +188,7 @@ public class Book implements IEntity, Serializable {
             }
         } while (isExit);
 
-        System.out.println("Nhập mô tả sách: "); //(không bỏ trống)
+        System.out.print("Nhập mô tả sách: "); //(không bỏ trống)
         do {
             String descriptionInput = scanner.nextLine();
             if (descriptionInput != null && !descriptionInput.trim().isEmpty()) {
@@ -201,7 +199,7 @@ public class Book implements IEntity, Serializable {
             }
         } while (isExit);
 
-        System.out.println("Chọn danh mục của sản phẩm: "); //hiển thị ra các danh mục
+        System.out.print("Chọn danh mục của sản phẩm: "); //hiển thị ra các danh mục
         do {
             for (int i = 0; i < categoryList.size(); i++) {
                 System.out.println(i + 1 + "." + categoryList.get(i).getCategoryName());
@@ -210,12 +208,12 @@ public class Book implements IEntity, Serializable {
             String choiceInput = scanner.nextLine();
             if (!choiceInput.isEmpty()) { // Kiểm tra lựa chọn không trống
                 try {
-                    int choice = Integer.parseInt(scanner.nextLine()); //người dùng nhập để chọn một danh mục từ danh sách
-                    if (choice > 1 || choice <= categoryList.size()) {
-                        System.err.println("Không tồn tại mã danh mục, vui lòng nhập lại!");
-                    } else {
+                    int choice = Integer.parseInt(choiceInput); //người dùng nhập để chọn một danh mục từ danh sách
+                    if (choice >= 1 && choice <= categoryList.size()) {
                         this.categoryId = categoryList.get(choice - 1).getCategoryId(); //truy cập phần tử thứ (choice - 1)
                         break;
+                    } else {
+                        System.err.println("Không tồn tại mã danh mục, vui lòng nhập lại!");
                     }
                 } catch (NumberFormatException e) {
                     System.err.println("Lựa chọn phải là một số nguyên. Vui lòng nhập lại!");

@@ -12,10 +12,11 @@ import java.util.Scanner;
 public class CatagoryManagement {
     public static void showCategoriesMenu(List<Category> categoryList, List<Book> bookList) {
         Scanner scanner = new Scanner(System.in);
-        categoryList = WriteReadCategory.readCategoryFromFile();
-        categoryList = (categoryList != null) ? categoryList : new ArrayList<>();
         boolean exitMenuCatagory = true;
         do {
+            for (Category ct:categoryList) {
+                ct.output();
+            }
             System.out.println("==============QUẢN LÝ THỂ LOẠI ==============");
             System.out.println("1. Thêm mới thể loại");
             System.out.println("2. Hiển thị danh sách theo tên A–Z");
@@ -38,10 +39,11 @@ public class CatagoryManagement {
                     break;
                 case 3:
                     System.out.println("3. Thống kê thể loại và số sách có trong mỗi thể loại");
+                    CatalogImp.statsCatalog(categoryList,bookList);
                     break;
                 case 4:
                     System.out.println("4. Cập nhật thể loại");
-
+                    CatalogImp.updateCatalog(scanner,categoryList);
                     break;
                 case 5:
                     System.out.println("5. Xóa thể loại");

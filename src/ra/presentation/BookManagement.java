@@ -14,16 +14,17 @@ public class BookManagement {
 
     public static void showBooksMenu(List<Category> categoryList, List<Book> bookList) {
         Scanner scanner = new Scanner(System.in);
-        bookList = WriteReadBook.readBookFromFile();
-        bookList = (bookList != null) ? bookList : new ArrayList<>();
         boolean exitMenuBook = true;
         do {
+            for (Book b: bookList) {
+                b.output();
+            }
             System.out.println("==============QUẢN LÝ SÁCH==============");
             System.out.println("1. Thêm mới sách");
             System.out.println("2. Cập nhật thông tin sách");
             System.out.println("3. Xóa sách");
             System.out.println("4. Tìm kiếm sách");
-            System.out.println("5. Hiển thị danh sách theo nhóm thểloại");
+            System.out.println("5. Hiển thị danh sách theo nhóm thể loại");
             System.out.println("6. Quay lại");
             System.out.println("-----------------------------------------------");
             System.out.println("Nhập lựa chọn của bạn: ");
@@ -35,16 +36,16 @@ public class BookManagement {
                     BookImp.createBook(scanner, categoryList, bookList);
                     break;
                 case 2:
-                    System.out.println("2. Hiển thị danh sách theo tên A–Z");
+                    System.out.println("2. Cập nhật thông tin sách");
                     break;
                 case 3:
-                    System.out.println("3. Thống kê thể loại và số sách có trong mỗi thể loại");
+                    System.out.println("3.Xóa sách");
                     break;
                 case 4:
-                    System.out.println("4. Cập nhật thể loại");
+                    System.out.println("4. Tìm kiếm sách");
                     break;
                 case 5:
-                    System.out.println("5. Xóa thể loại");
+                    System.out.println("5. Hiển thị danh sách theo nhóm thểloại");
                     break;
                 case 6:
                     exitMenuBook = false;
