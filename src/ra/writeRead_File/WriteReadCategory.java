@@ -1,6 +1,6 @@
 package ra.writeRead_File;
 
-import ra.bussiness.data.DataURL;
+import ra.bussiness.config.DataURL;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
 

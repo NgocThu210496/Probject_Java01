@@ -1,6 +1,6 @@
 package ra.bussiness.entity;
 
-import ra.bussiness.design.IEntity;
+import ra.bussiness.Interface.IEntity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -128,4 +128,7 @@ public class Category implements IEntity, Serializable {
         System.out.printf("Mã thể loại sách: %d - Tên thể loại: %s - Trạng thái thể loại: %s\n", this.categoryId, this.categoryName, this.categoryStatus ? "Hoạt động" : "Không hoạt động");
         System.out.println("-------------------------*-----------------------------");
     }
+
+//    System.out.printf("%20s | %30s |%30s  |\n","Mã thể loại sách", "Tên thể loại", "Trạng thái thể loại");
+//        System.out.printf("%20d | %30s |%30s  |\n",123, "Sach trinh tham", "Không hoạt động");
 }

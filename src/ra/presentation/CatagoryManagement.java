@@ -26,7 +26,7 @@ public class CatagoryManagement {
             System.out.println("6. Quay lại");
             System.out.println("-----------------------------------------------");
             System.out.println("Nhập lựa chọn của bạn: ");
-            int choice = Integer.parseInt(scanner.next());
+            int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
                 case 1:
@@ -43,10 +43,11 @@ public class CatagoryManagement {
                     break;
                 case 4:
                     System.out.println("4. Cập nhật thể loại");
-                    CatalogImp.updateCatalog(scanner,categoryList);
+                    CatalogImp.updateCatalog(scanner,categoryList,bookList);
                     break;
                 case 5:
                     System.out.println("5. Xóa thể loại");
+                    CatalogImp.deleteCatalog(scanner,categoryList,bookList);
                     break;
                 case 6:
                     exitMenuCatagory = false;

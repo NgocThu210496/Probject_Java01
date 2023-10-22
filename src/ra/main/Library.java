@@ -19,7 +19,7 @@ public class Library {
     }
     public static List<Book> bookList;
     static{
-        bookList = WriteReadBook.readBookFromFile();
+         bookList = WriteReadBook.readBookFromFile();
         bookList=(bookList!=null)? bookList:new ArrayList<>();
     }
 

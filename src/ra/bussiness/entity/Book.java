@@ -1,6 +1,6 @@
 package ra.bussiness.entity;
 
-import ra.bussiness.design.IEntity;
+import ra.bussiness.Interface.IEntity;
 
 import java.io.Serializable;
 import java.time.Year;

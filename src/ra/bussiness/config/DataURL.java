@@ -1,4 +1,4 @@
-package ra.bussiness.data;
+package ra.bussiness.config;
 
 public class DataURL {
     //public static final String URL_CATALOG_FILE = "/Users/ngocthu6778gmail.com/Desktop/Rikei/Java/Baitap/baitap/Java_Probject_01/src/ra/bussiness/data/categories.txt";

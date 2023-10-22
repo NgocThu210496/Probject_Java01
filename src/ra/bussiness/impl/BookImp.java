@@ -8,27 +8,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookImp {
-    public static void createBook(Scanner scanner, List<Category> categoryList, List<Book> bookList){
-        scanner=new Scanner(System.in);
-        System.out.print("Nhập vào số sách cần thêm mới' ");
-        int n=Integer.parseInt(scanner.nextLine());
-        boolean addedSuccessfuly=false; // kiem tra da them thanh cong hay chua?
-        for(int i=0;i<n;i++){
+    public static boolean createBook(Scanner scanner, List<Category> categoryList, List<Book> bookList) {
+        scanner = new Scanner(System.in);
+        System.out.print("Nhập vào số sách cần thêm mới: ");
+        int n = Integer.parseInt(scanner.nextLine());
+        boolean addedSuccessfuly = false; // kiem tra da them thanh cong hay chua?
+        for (int i = 0; i < n; i++) {
             //khoi tao doi tuong book
-            Book book=new Book();
-            book.inputDataBook(scanner,categoryList,bookList); //nhap vao inputDataBook
+            Book book = new Book();
+            book.inputDataBook(scanner, categoryList, bookList); //nhap vao inputDataBook
             bookList.add(book);
-            addedSuccessfuly=true;
+            addedSuccessfuly = true;
         }
-        if(addedSuccessfuly){
+        if (addedSuccessfuly) {
             //luu vao file .txt
-            boolean result= WriteReadBook.writeBookToFile(bookList, categoryList);
-            if(result){
+            boolean result = WriteReadBook.writeBookToFile(bookList, categoryList);
+            if (result) {
                 System.out.println("Đã thêm sách thành công và lưu vào file");
-            }else {
+            } else {
                 System.err.println("Không thể lưu dữ liệu vào file.");
             }
         }
+        return addedSuccessfuly;
     }
 
 }
