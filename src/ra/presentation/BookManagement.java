@@ -28,7 +28,7 @@ public class BookManagement {
             System.out.println("6. Quay lại");
             System.out.println("-----------------------------------------------");
             System.out.println("Nhập lựa chọn của bạn: ");
-            int choice = Integer.parseInt(scanner.next());
+            int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
                 case 1:
@@ -37,6 +37,7 @@ public class BookManagement {
                     break;
                 case 2:
                     System.out.println("2. Cập nhật thông tin sách");
+                    BookImp.updateBook(scanner, categoryList, bookList);
                     break;
                 case 3:
                     System.out.println("3.Xóa sách");

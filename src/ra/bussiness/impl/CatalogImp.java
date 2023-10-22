@@ -71,7 +71,6 @@ public class CatalogImp {
         }
     }
 
-
     public static boolean updateCatalog(Scanner scanner, List<Category> categoryList, List<Book> bookList) {
         int updateId = 0;
 //        boolean found = false;//kiểm tra  mã thể loại tồn tại hay không
