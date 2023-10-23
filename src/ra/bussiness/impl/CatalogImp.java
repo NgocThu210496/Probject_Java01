@@ -2,6 +2,7 @@ package ra.bussiness.impl;
 
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
+import ra.writeRead_File.WriteReadBook;
 import ra.writeRead_File.WriteReadCategory;
 
 import java.util.*;
@@ -67,14 +68,12 @@ public class CatalogImp {
             int categoryId = category.getCategoryId();
             String catalogName = category.getCategoryName();
             int countBook = mapStatsCatalog.get(catalogName);
-            System.out.println("Mã: " + categoryId +   " - Tên thể loại: " + catalogName + " - Số sách: " + countBook);
+            System.out.println("Mã: " + categoryId + " - Tên thể loại: " + catalogName + " - Số sách: " + countBook);
         }
     }
 
     public static boolean updateCatalog(Scanner scanner, List<Category> categoryList, List<Book> bookList) {
         int updateId = 0;
-//        boolean found = false;//kiểm tra  mã thể loại tồn tại hay không
-//        boolean addedSuccessfully = false; //kiểm tra đã update thành công chưa
         System.out.print("Nhập vào mã id cần cập nhật: ");
         do {
             String idInput = scanner.nextLine();
@@ -162,33 +161,53 @@ public class CatalogImp {
     }
 
     public static void deleteCatalog(Scanner scanner, List<Category> categoryList, List<Book> bookList) {
+        // Nhập vào mã danh mục cần xóa
         System.out.println("Nhập vào mã danh mục cần xóa:");
+        // Biến kiểm tra tính hợp lệ của mã danh mục
         boolean validId = false;
 
         do {
             int catalogId;
             try {
+                // Đọc và chuyển đổi mã danh mục từ chuỗi người dùng nhập vào số nguyên
                 catalogId = Integer.parseInt(scanner.nextLine());
+
+                // Tìm vị trí (index) của danh mục trong danh sách dựa trên mã danh mục
                 int indexDelete = getIndexCatalogOfList(catalogId, categoryList);
 
                 if (indexDelete >= 0) {
-                    boolean isContains = false;
-
+                    // Lấy thông tin danh mục cần xóa
+                    Category categoryToDelete = categoryList.get(indexDelete);
                     // Kiểm tra xem danh mục có chứa sách hay không
+                    boolean isContains = false;
                     for (Book b : bookList) {
                         if (b.getCategoryId() == catalogId) {
                             isContains = true;
-                            break; // Thoát khỏi vòng lặp ngay khi tìm thấy sách
+                            break;
                         }
                     }
-
+                    // Nếu danh mục chứa sách, thông báo và không thực hiện xóa
                     if (isContains) {
-                        System.err.println("Danh mục đã chứa sách, không thể xóa");
+                        System.err.println("Danh mục này đang chứa sách và không thể xóa.");
                     } else {
-                        categoryList.remove(indexDelete); // Xóa danh mục
-                        System.out.println("Đã xoá danh mục thành công.");
+                        // Hiển thị thông tin danh mục trước khi xóa
+                        System.out.println("Thông tin danh mục trước khi xóa:");
+                        categoryToDelete.output();
+                        // Yêu cầu xác nhận từ người dùng
+                        System.out.print("Xác nhận xóa danh mục (yes/no): ");
+                        String confirm = scanner.nextLine();
+
+                        if (confirm.equalsIgnoreCase("yes")) {
+                            categoryList.remove(indexDelete);
+                            System.out.println("Đã xoá danh mục thành công.");
+                            validId = true;
+                        } else if (confirm.equalsIgnoreCase("no")) {
+                            System.out.println("Hủy xóa danh mục.");
+                            validId = true;
+                        } else {
+                            System.err.println("Lựa chọn không hợp lệ. Vui lòng nhập 'yes' hoặc 'no'.");
+                        }
                     }
-                    validId = true; // Đã xử lý xong mã danh mục
                 } else {
                     System.err.println("Mã danh mục không tồn tại. Vui lòng nhập lại.");
                 }
@@ -197,9 +216,10 @@ public class CatalogImp {
             }
         } while (!validId);
 
-        // Ghi danh sách danh mục vào file .txt
+        // Ghi danh sách danh mục đã cập nhật vào tệp tin
         WriteReadCategory.writeCategoryToFile(categoryList, bookList);
     }
+
 
     public static int getIndexCatalogOfList(int catalogId, List<Category> listCategories) {
         for (int i = 0; i < listCategories.size(); i++) {
@@ -209,6 +229,4 @@ public class CatalogImp {
         }
         return -1;
     }
-
-
 }

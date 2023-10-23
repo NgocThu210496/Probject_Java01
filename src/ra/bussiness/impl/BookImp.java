@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookImp {
-    //static boolean found = false;//kiểm tra  mã thể loại tồn tại hay không
-
-
     public static boolean createBook(Scanner scanner, List<Category> categoryList, List<Book> bookList) {
         scanner = new Scanner(System.in);
         System.out.print("Nhập vào số sách cần thêm mới: ");
@@ -38,19 +35,19 @@ public class BookImp {
     }
 
     public static boolean updateBook(Scanner scanner, List<Category> categoryList, List<Book> bookList) {
-        boolean addedSuccessfully = false; //kiểm tra đã update/delete thành công chưa
+        boolean addedSuccessfully = false; //kiểm tra đã update
         System.out.print("Nhập vào mã sách cần cập nhật: ");
         do {
             String idInput = scanner.nextLine();
             if (!idInput.isEmpty()) {
                 boolean found = false; //kiểm tra sự tồn tại của mã sách
-
                 // Kiểm tra xem có tồn tại mã ID
                 for (int i = 0; i < bookList.size(); i++) {
                     Book book = bookList.get(i);
                     if (book.getBookId().equals(idInput)) {
                         found = true;
                         // Thực hiện cập nhật thông tin sách ở đây
+                        System.out.println("------------------Cập nhập thông tin sách: -----------------");
                         System.out.print("Nhập tiêu đề sách mới (từ 6-50 ký tự): ");
                         do {
                             String newBookTitle = scanner.nextLine();
@@ -125,7 +122,6 @@ public class BookImp {
                         }
                         while (true);
 
-
                         System.out.print("Nhập mô tả sách mới: ");
                         do {
                             String newDescription = scanner.nextLine();
@@ -154,7 +150,6 @@ public class BookImp {
 
                         System.out.println("Thông tin sách sau khi cập nhật:");
                         //  book.output();
-
                     }
                 }
                 if (!found) {
@@ -175,6 +170,80 @@ public class BookImp {
             }
             addedSuccessfully = true;
         } while (true);
+    }
+
+    public static void deleteProduct(Scanner scanner, List<Book> bookList, List<Category> categoryList) {
+        boolean deleted = false;
+        do {
+            System.out.print("Nhập vào mã sản phẩm cần xóa: ");
+            String input = scanner.nextLine();
+            int indexDelete = getIndexOfListBook(input, bookList);
+            if (indexDelete >= 0) {
+                // Hiển thị thông tin sản phẩm trước khi xóa
+                Book productToDelete = bookList.get(indexDelete);
+                System.out.println("Thông tin cuốn sách sẽ bị xóa:");
+                productToDelete.output();
+                // Xác nhận việc xóa
+                System.out.print("Bạn có chắc chắn muốn xóa cuốn sách này? (yes/no): ");
+                String confirmation = scanner.nextLine();
+                if (confirmation.equalsIgnoreCase("yes")) {
+                    bookList.remove(indexDelete);
+                    System.out.println("Cuốn sách đã được xóa.");
+                    // Lưu lại danh sách đã cập nhật
+                    WriteReadBook.writeBookToFile(bookList, categoryList);
+                    deleted = true;
+                } else {
+                    System.out.println("Xóa sách đã bị hủy.");
+                    deleted = true;
+                }
+            } else {
+                System.err.println("Mã sách không tồn tại.");
+            }
+        } while (!deleted);
+    }
+
+    public static void displayBookByCatalory(List<Category> categoryList, List<Book> bookList) {
+        for (Category ct : categoryList) {
+            System.out.println("Thể loại: " + ct.getCategoryName() + " gồm các loại sách: ");
+            for (Book b : bookList) {
+                if (b.getCategoryId() == ct.getCategoryId()) { //hiển thị sách thuộc thể loại
+                    System.out.println("\t" + b.getBookTitle());
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void searchBooks(Scanner scanner,List<Book> bookList) {
+        boolean found = false;
+
+        do {
+            System.out.print("Nhập từ khóa tìm kiếm: ");
+            String keyword = scanner.nextLine();
+
+            if (keyword.trim().isEmpty()) {
+                System.err.println("Từ khóa tìm kiếm không được để trống. Vui lòng nhập lại.");
+            } else {
+                System.out.println("Kết quả tìm kiếm cho từ khóa: " + keyword);
+
+                // Duyệt qua danh sách sách
+                for (Book book : bookList) {
+                    if (book.getBookTitle().toLowerCase().contains(keyword.toLowerCase()) ||
+                            book.getAuthor().toLowerCase().contains(keyword.toLowerCase()) ||
+                            book.getPublisher().toLowerCase().contains(keyword.toLowerCase())) {
+                        // Kiểm tra xem từ khóa có xuất hiện trong tiêu đề, tác giả hoặc NXB không
+                        System.out.println("Tiêu đề: " + book.getBookTitle());
+                        System.out.println("Tác giả: " + book.getAuthor());
+                        System.out.println("Nhà xuất bản: " + book.getPublisher());
+                        System.out.println();
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    System.err.println("Không tìm thấy kết quả nào cho từ khóa '" + keyword + "'. Vui lòng nhập lại!");
+                }
+            }
+        } while (!found);
     }
 
     private static int getNewCategoryIndex(Scanner scanner, List<Category> categoryList) {
@@ -202,5 +271,12 @@ public class BookImp {
         return newCategoryIndex;
     }
 
-
+    public static int getIndexOfListBook(String productId, List<Book> bookList) {
+        for (int i = 0; i < bookList.size(); i++) {
+            if (bookList.get(i).getBookId().equals(productId)) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

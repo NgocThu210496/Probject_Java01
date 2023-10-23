@@ -3,9 +3,6 @@ package ra.presentation;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
 import ra.bussiness.impl.CatalogImp;
-import ra.writeRead_File.WriteReadCategory;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 

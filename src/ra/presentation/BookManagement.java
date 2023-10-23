@@ -3,15 +3,11 @@ package ra.presentation;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
 import ra.bussiness.impl.BookImp;
-import ra.writeRead_File.WriteReadBook;
-import ra.writeRead_File.WriteReadCategory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class BookManagement {
-
     public static void showBooksMenu(List<Category> categoryList, List<Book> bookList) {
         Scanner scanner = new Scanner(System.in);
         boolean exitMenuBook = true;
@@ -41,12 +37,15 @@ public class BookManagement {
                     break;
                 case 3:
                     System.out.println("3.Xóa sách");
+                    BookImp.deleteProduct(scanner,bookList,categoryList);
                     break;
                 case 4:
                     System.out.println("4. Tìm kiếm sách");
+                    BookImp.searchBooks(scanner,bookList);
                     break;
                 case 5:
-                    System.out.println("5. Hiển thị danh sách theo nhóm thểloại");
+                    System.out.println("5. Hiển thị danh sách sách theo nhóm thể loại");
+                    BookImp.displayBookByCatalory(categoryList,bookList);
                     break;
                 case 6:
                     exitMenuBook = false;
