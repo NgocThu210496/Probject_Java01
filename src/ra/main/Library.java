@@ -1,5 +1,6 @@
 package ra.main;
 
+import ra.bussiness.config.Color;
 import ra.bussiness.config.UserChoice;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
@@ -46,13 +47,14 @@ public class Library {
 
         Scanner scanner = new Scanner(System.in);
         do {
-            System.out.println("=========== QUẢN LÝ THƯ VIỆN ============");
-            System.out.println("1. Quản lý Thể loại");
-            System.out.println("2. Quản lý Sách");
-            System.out.println("3. Thoát");
-            System.out.println("--------------------------------------");
+            System.out.println("                                                    .==========================================================.");
+            System.out.println(Color.TEXT_YELLOW+"                                                    |                     QUẢN LÝ THƯ VIỆN                     |"+ Color.TEXT_RESET);
+            System.out.println("                                                    |==========================================================|");
+            System.out.println("                                                    |                    1. QUẢN LÝ THỂ LOẠI                   |");
+            System.out.println("                                                    |                    2. QUẢN LÝ SÁCH                       |");
+            System.out.println("                                                    |                    3. THOÁT                              |");
+            System.out.println("                                                    |==========================================================|");
             int choice;
-            do {
                 choice = UserChoice.getUserChoiceMain(scanner);
                 switch (choice) {
                     case 1:
@@ -66,7 +68,6 @@ public class Library {
                     case 3:
                         System.exit(0);
                 }
-            } while (choice > 1 || choice < 3);
         } while (true);
 
     }

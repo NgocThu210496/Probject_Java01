@@ -1,5 +1,6 @@
 package ra.presentation;
 
+import ra.bussiness.config.Color;
 import ra.bussiness.config.UserChoice;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
@@ -13,19 +14,21 @@ public class BookManagement {
         Scanner scanner = new Scanner(System.in);
         boolean exitMenuBook = true;
         do {
-            for (Book b : bookList) {
-                b.output();
-            }
-            System.out.println("==============QUẢN LÝ SÁCH==============");
-            System.out.println("1. Thêm mới sách");
-            System.out.println("2. Cập nhật thông tin sách");
-            System.out.println("3. Xóa sách");
-            System.out.println("4. Tìm kiếm sách");
-            System.out.println("5. Hiển thị danh sách theo nhóm thể loại");
-            System.out.println("6. Quay lại");
-            System.out.println("-----------------------------------------------");
+//            for (Book b : bookList) {
+//                b.output();
+//            }
+            BookImp.displayBook(bookList);
+            System.out.println(".===========================================================.");
+            System.out.println(Color.TEXT_BLUE+"|                        QUẢN LÝ SÁCH                       |"+Color.TEXT_RESET);
+            System.out.println("|===========================================================|");
+            System.out.println("|               1. Thêm mới sách                            |");
+            System.out.println("|               2. Cập nhật thông tin sách                  |");
+            System.out.println("|               3. Xóa sách                                 |");
+            System.out.println("|               4. Tìm kiếm sách                            |");
+            System.out.println("|               5. Hiển thị danh sách theo nhóm thể loại    |");
+            System.out.println("|               6. Quay lại                                 |");
+            System.out.println("|===========================================================|");
             int choice;
-            do {
                 choice = UserChoice.getUserChoice(scanner);
 
                 switch (choice) {
@@ -55,8 +58,6 @@ public class BookManagement {
                     default:
                         break;
                 }
-
-            } while (choice < 1 || choice > 6);// Lặp lại nếu lựa chọn không hợp lệ
         } while (exitMenuBook);
     }
 }

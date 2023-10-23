@@ -1,6 +1,7 @@
 package ra.bussiness.entity;
 
 import ra.bussiness.Interface.IEntity;
+import ra.bussiness.config.Color;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Category implements IEntity, Serializable {
         this.categoryName = categoryName;
         this.categoryStatus = categoryStatus;
     }
+
 
     public int getCategoryId() {
         return categoryId;
@@ -125,10 +127,11 @@ public class Category implements IEntity, Serializable {
 
     @Override
     public void output() {
-        System.out.printf("Mã thể loại sách: %d - Tên thể loại: %s - Trạng thái thể loại: %s\n", this.categoryId, this.categoryName, this.categoryStatus ? "Hoạt động" : "Không hoạt động");
-        System.out.println("-------------------------*-----------------------------");
-    }
+//        System.out.printf("Mã thể loại sách: %d - Tên thể loại: %s - Trạng thái thể loại: %s\n", this.categoryId, this.categoryName, this.categoryStatus ? "Hoạt động" : "Không hoạt động");
+//        System.out.println("-------------------------*-----------------------------");
 
-//    System.out.printf("%20s | %30s |%30s  |\n","Mã thể loại sách", "Tên thể loại", "Trạng thái thể loại");
-//        System.out.printf("%20d | %30s |%30s  |\n",123, "Sach trinh tham", "Không hoạt động");
+        System.out.printf("%50d             | %20s            |%20s            |\n",this.categoryId, this.categoryName, this.categoryStatus? "Hoạt động" : "Không hoạt động");
+        System.out.println("                                |-------------------------------------------------------------------------------------------------|");
+
+    }
 }

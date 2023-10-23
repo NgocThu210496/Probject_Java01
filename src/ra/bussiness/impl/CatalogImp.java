@@ -1,5 +1,6 @@
 package ra.bussiness.impl;
 
+import ra.bussiness.config.DisplayHeader;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
 import ra.writeRead_File.WriteReadBook;
@@ -35,6 +36,8 @@ public class CatalogImp {
     }
 
     public static void displayCatalog(List<Category> categoryList) {
+        // In tiêu đề
+        DisplayHeader.displayHeaderCatalog();
         for (Category ct : categoryList) {
             ct.output();
         }

@@ -1,5 +1,6 @@
 package ra.bussiness.impl;
 
+import ra.bussiness.config.DisplayHeader;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
 import ra.writeRead_File.WriteReadBook;
@@ -33,7 +34,13 @@ public class BookImp {
         }
         return addedSuccessfuly;
     }
-
+    public static void displayBook(List<Book> bookList) {
+        // In tiêu đề
+        DisplayHeader.displayHeaderBook();
+        for (Book book : bookList) {
+            book.output();
+        }
+    }
     public static boolean updateBook(Scanner scanner, List<Category> categoryList, List<Book> bookList) {
         boolean addedSuccessfully = false; //kiểm tra đã update
         System.out.print("Nhập vào mã sách cần cập nhật: ");

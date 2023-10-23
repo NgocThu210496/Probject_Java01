@@ -1,6 +1,7 @@
 package ra.bussiness.entity;
 
 import ra.bussiness.Interface.IEntity;
+import ra.bussiness.config.Color;
 
 import java.io.Serializable;
 import java.time.Year;
@@ -100,7 +101,7 @@ public class Book implements IEntity, Serializable {
                         for (int i = 0; i < bookList.size(); i++) {
                             if (bookList.get(i).getBookId().equals(getBookId())) {
                                 isExist = true;
-                                System.err.println("Mã sách đã tồn tại. Vui lòng nhập lại");
+                                System.out.println(Color.TEXT_RED + "Mã sách đã tồn tại. Vui lòng nhập lại" + Color.TEXT_RESET);
                                 break;
                             }
                         }
@@ -108,14 +109,14 @@ public class Book implements IEntity, Serializable {
                             break;
                         }
                     } else {
-                        System.err.println("Mã sách phải bắt đầu bằng 'B'. Vui lòng nhập lại!");
+                        System.out.println(Color.TEXT_RED +"Mã sách phải bắt đầu bằng 'B'. Vui lòng nhập lại!"+ Color.TEXT_RESET);
                     }
 
                 } else {
-                    System.err.println("Mã sách phải có độ dài 4 ký tự. Vui lòng nhập lại!");
+                    System.out.println(Color.TEXT_RED +"Mã sách phải có độ dài 4 ký tự. Vui lòng nhập lại!"+ Color.TEXT_RESET);
                 }
             } else {
-                System.err.println("Mã sách không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED +"Mã sách không được để trống. Vui lòng nhập lại!"+ Color.TEXT_RESET);
             }
         } while (isExit);
 
@@ -128,7 +129,7 @@ public class Book implements IEntity, Serializable {
                     for (int i = 0; i < bookList.size(); i++) {
                         if (bookList.get(i).getBookTitle().equals(getBookTitle())) {
                             isExist = true;
-                            System.out.println("Tiêu đề sách đã tồn tại. Vui lòng nhập lại");
+                            System.out.println(Color.TEXT_RED +"Tiêu đề sách đã tồn tại. Vui lòng nhập lại"+ Color.TEXT_RESET);
                             break;
                         }
                     }
@@ -136,10 +137,10 @@ public class Book implements IEntity, Serializable {
                         break;
                     }
                 } else {
-                    System.err.println("Tiêu đề sách phải có độ dài từ 6-50 ký tự. Vui lòng nhập lại!");
+                    System.out.println(Color.TEXT_RED +"Tiêu đề sách phải có độ dài từ 6-50 ký tự. Vui lòng nhập lại!"+ Color.TEXT_RESET);
                 }
             } else {
-                System.err.println("Tiêu đề sách không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED +"Tiêu đề sách không được để trống. Vui lòng nhập lại!"+ Color.TEXT_RESET);
             }
         } while (isExit);
 
@@ -228,8 +229,18 @@ public class Book implements IEntity, Serializable {
 
     @Override
     public void output() {
-        System.out.printf("Mã sách: %s - Tiêu đề: %s - Tác giả: %s\n", this.bookId, this.bookTitle, this.author);
-        System.out.printf("NXB: %s - Năm xuất bản: %d - Mô tả sách: %s - Danh mục của sản phẩm: %d\n", this.publisher, this.year, this.description, this.categoryId);
-        System.out.println("-------------------------*-----------------------------");
+//        System.out.printf("Mã sách: %s - Tiêu đề: %s - Tác giả: %s\n", this.bookId, this.bookTitle, this.author);
+//        System.out.printf("NXB: %s - Năm xuất bản: %d - Mô tả sách: %s - Danh mục của sản phẩm: %d\n", this.publisher, this.year, this.description, this.categoryId);
+//        System.out.println("-------------------------*-----------------------------");
+
+        System.out.printf("%30s       | %10s    | %10s    | %10s     | %10d    |%10s    |%10d   |\n",
+                this.bookId, this.bookTitle, this.author, this.publisher, this.year, this.description, this.categoryId );
+        System.out.println("                        |-------------------------------------------------------------------------------------------------------------------|");
+
+
+
     }
+
+
+
 }

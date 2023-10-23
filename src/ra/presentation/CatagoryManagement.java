@@ -1,5 +1,6 @@
 package ra.presentation;
 
+import ra.bussiness.config.Color;
 import ra.bussiness.config.UserChoice;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
@@ -13,20 +14,22 @@ public class CatagoryManagement {
         Scanner scanner = new Scanner(System.in);
         boolean exitMenuCatagory = true;
         do {
-            for (Category ct : categoryList) {
-                ct.output();
-            }
-            System.out.println("==============QUẢN LÝ THỂ LOẠI ==============");
-            System.out.println("1. Thêm mới thể loại");
-            System.out.println("2. Hiển thị danh sách theo tên A–Z");
-            System.out.println("3. Thống kê thể loại và số sách có trong mỗi thể loại");
-            System.out.println("4. Cập nhật thể loại");
-            System.out.println("5. Xóa thể loại");
-            System.out.println("6. Quay lại");
-            System.out.println("-----------------------------------------------");
+//            for (Category ct : categoryList) {
+//                ct.output();
+//            }
+            CatalogImp.displayCatalog(categoryList);
+            System.out.println(".=============================================================.");
+            System.out.println(Color.TEXT_BLUE +"|                       QUẢN LÝ THỂ LOẠI                       |"+Color.TEXT_RESET);
+            System.out.println("|==============================================================|");
+            System.out.println("|        1. Thêm mới thể loại                                  |");
+            System.out.println("|        2. Hiển thị danh sách theo tên A–Z                    |");
+            System.out.println("|        3. Thống kê thể loại và số sách có trong mỗi thể loại |");
+            System.out.println("|        4. Cập nhật thể loại                                  |");
+            System.out.println("|        5. Xóa thể loại                                       |");
+            System.out.println("|        6. Quay lại                                           |");
+            System.out.println("|==============================================================|");
 
             int choice;
-            do {
                 choice = UserChoice.getUserChoice(scanner);
 
                 switch (choice) {
@@ -56,7 +59,6 @@ public class CatagoryManagement {
                     default:
                         break;
                 }
-            } while (choice < 1 || choice > 6);
 
         } while (exitMenuCatagory);
     }
