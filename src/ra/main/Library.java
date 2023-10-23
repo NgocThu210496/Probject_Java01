@@ -1,5 +1,6 @@
 package ra.main;
 
+import ra.bussiness.config.UserChoice;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
 import ra.presentation.BookManagement;
@@ -13,14 +14,17 @@ import java.util.Scanner;
 
 public class Library {
     public static List<Category> categoriesList;
+
     static {
         categoriesList = WriteReadCategory.readCategoryFromFile();
         categoriesList = (categoriesList != null) ? categoriesList : new ArrayList<>();
     }
+
     public static List<Book> bookList;
-    static{
-         bookList = WriteReadBook.readBookFromFile();
-        bookList=(bookList!=null)? bookList:new ArrayList<>();
+
+    static {
+        bookList = WriteReadBook.readBookFromFile();
+        bookList = (bookList != null) ? bookList : new ArrayList<>();
     }
 
 //    static {
@@ -38,33 +42,32 @@ public class Library {
 //    }
 
 
-
     public static void main(String[] args) {
 
-        Scanner scanner=new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         do {
             System.out.println("=========== QUẢN LÝ THƯ VIỆN ============");
             System.out.println("1. Quản lý Thể loại");
             System.out.println("2. Quản lý Sách");
             System.out.println("3. Thoát");
             System.out.println("--------------------------------------");
-            System.out.println("Lựa chọn của bạn: ");
-
-            int choice=Integer.parseInt(scanner.nextLine());
-            switch (choice){
-                case 1:
-                    System.out.println("1. Quản lý Thể loại");
-                    CatagoryManagement.showCategoriesMenu(categoriesList,bookList);
-                    break;
-                case 2:
-                    System.out.println("2. Quản lý Sách");
-                    BookManagement.showBooksMenu(categoriesList,bookList);
-                    break;
-                case 3:
-                    System.exit(0);
-            }
-
-        }while (true);
+            int choice;
+            do {
+                choice = UserChoice.getUserChoiceMain(scanner);
+                switch (choice) {
+                    case 1:
+                        System.out.println("1. Quản lý Thể loại");
+                        CatagoryManagement.showCategoriesMenu(categoriesList, bookList);
+                        break;
+                    case 2:
+                        System.out.println("2. Quản lý Sách");
+                        BookManagement.showBooksMenu(categoriesList, bookList);
+                        break;
+                    case 3:
+                        System.exit(0);
+                }
+            } while (choice > 1 || choice < 3);
+        } while (true);
 
     }
 

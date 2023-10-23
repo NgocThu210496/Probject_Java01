@@ -1,5 +1,6 @@
 package ra.presentation;
 
+import ra.bussiness.config.UserChoice;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
 import ra.bussiness.impl.BookImp;
@@ -12,7 +13,7 @@ public class BookManagement {
         Scanner scanner = new Scanner(System.in);
         boolean exitMenuBook = true;
         do {
-            for (Book b: bookList) {
+            for (Book b : bookList) {
                 b.output();
             }
             System.out.println("==============QUẢN LÝ SÁCH==============");
@@ -23,37 +24,39 @@ public class BookManagement {
             System.out.println("5. Hiển thị danh sách theo nhóm thể loại");
             System.out.println("6. Quay lại");
             System.out.println("-----------------------------------------------");
-            System.out.println("Nhập lựa chọn của bạn: ");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice;
+            do {
+                choice = UserChoice.getUserChoice(scanner);
 
-            switch (choice) {
-                case 1:
-                    System.out.println("1. Thêm mới thể loại");
-                    BookImp.createBook(scanner, categoryList, bookList);
-                    break;
-                case 2:
-                    System.out.println("2. Cập nhật thông tin sách");
-                    BookImp.updateBook(scanner, categoryList, bookList);
-                    break;
-                case 3:
-                    System.out.println("3.Xóa sách");
-                    BookImp.deleteProduct(scanner,bookList,categoryList);
-                    break;
-                case 4:
-                    System.out.println("4. Tìm kiếm sách");
-                    BookImp.searchBooks(scanner,bookList);
-                    break;
-                case 5:
-                    System.out.println("5. Hiển thị danh sách sách theo nhóm thể loại");
-                    BookImp.displayBookByCatalory(categoryList,bookList);
-                    break;
-                case 6:
-                    exitMenuBook = false;
-                    break;
-                default:
-                    System.out.println("Lựa chọn không hợp lệ. Vui lòng chọn lại!");
-            }
+                switch (choice) {
+                    case 1:
+                        System.out.println("1. Thêm mới thể loại");
+                        BookImp.createBook(scanner, categoryList, bookList);
+                        break;
+                    case 2:
+                        System.out.println("2. Cập nhật thông tin sách");
+                        BookImp.updateBook(scanner, categoryList, bookList);
+                        break;
+                    case 3:
+                        System.out.println("3.Xóa sách");
+                        BookImp.deleteProduct(scanner, bookList, categoryList);
+                        break;
+                    case 4:
+                        System.out.println("4. Tìm kiếm sách");
+                        BookImp.searchBooks(scanner, bookList);
+                        break;
+                    case 5:
+                        System.out.println("5. Hiển thị danh sách sách theo nhóm thể loại");
+                        BookImp.displayBookByCatalory(categoryList, bookList);
+                        break;
+                    case 6:
+                        exitMenuBook = false;
+                        break;
+                    default:
+                        break;
+                }
 
+            } while (choice < 1 || choice > 6);// Lặp lại nếu lựa chọn không hợp lệ
         } while (exitMenuBook);
     }
 }
