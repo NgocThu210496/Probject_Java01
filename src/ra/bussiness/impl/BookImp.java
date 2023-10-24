@@ -1,6 +1,6 @@
 package ra.bussiness.impl;
 
-import ra.bussiness.config.DisplayHeader;
+import ra.bussiness.config.Display;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
 import ra.writeRead_File.WriteReadBook;
@@ -34,13 +34,15 @@ public class BookImp {
         }
         return addedSuccessfuly;
     }
+
     public static void displayBook(List<Book> bookList) {
         // In tiêu đề
-        DisplayHeader.displayHeaderBook();
+        Display.displayHeaderBook();
         for (Book book : bookList) {
             book.output();
         }
     }
+
     public static boolean updateBook(Scanner scanner, List<Category> categoryList, List<Book> bookList) {
         boolean addedSuccessfully = false; //kiểm tra đã update
         System.out.print("Nhập vào mã sách cần cập nhật: ");
@@ -141,7 +143,7 @@ public class BookImp {
                         }
                         while (true);
 
-                        System.out.print("Chọn danh mục mới của sản phẩm: ");
+                        System.out.println("Chọn danh mục mới của sản phẩm: ");
                         for (int j = 0; j < categoryList.size(); j++) {
                             System.out.println(j + 1 + ". " + categoryList.get(j).getCategoryName());
                         }
@@ -179,6 +181,8 @@ public class BookImp {
         } while (true);
     }
 
+
+
     public static void deleteProduct(Scanner scanner, List<Book> bookList, List<Category> categoryList) {
         boolean deleted = false;
         do {
@@ -189,9 +193,11 @@ public class BookImp {
                 // Hiển thị thông tin sản phẩm trước khi xóa
                 Book productToDelete = bookList.get(indexDelete);
                 System.out.println("Thông tin cuốn sách sẽ bị xóa:");
+                Display.displayHeaderBook(); // Hiển thị tiêu đề cho mỗi cuốn sách
                 productToDelete.output();
                 // Xác nhận việc xóa
-                System.out.print("Bạn có chắc chắn muốn xóa cuốn sách này? (yes/no): ");
+                //System.out.print("Bạn có chắc chắn muốn xóa cuốn sách này? (yes/no): ");
+                Display.displayDelete();
                 String confirmation = scanner.nextLine();
                 if (confirmation.equalsIgnoreCase("yes")) {
                     bookList.remove(indexDelete);

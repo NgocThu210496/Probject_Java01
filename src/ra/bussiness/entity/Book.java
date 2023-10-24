@@ -2,6 +2,7 @@ package ra.bussiness.entity;
 
 import ra.bussiness.Interface.IEntity;
 import ra.bussiness.config.Color;
+import ra.bussiness.impl.BookImp;
 
 import java.io.Serializable;
 import java.time.Year;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Book implements IEntity, Serializable {
+    //public ra.bussiness.impl.BookImp BookImp;
     private String bookId;
     private String bookTitle;
     private String author; //Tên tác giả
@@ -233,9 +235,9 @@ public class Book implements IEntity, Serializable {
 //        System.out.printf("NXB: %s - Năm xuất bản: %d - Mô tả sách: %s - Danh mục của sản phẩm: %d\n", this.publisher, this.year, this.description, this.categoryId);
 //        System.out.println("-------------------------*-----------------------------");
 
-        System.out.printf("%30s       | %10s    | %10s    | %10s     | %10d    |%10s    |%10d   |\n",
+        System.out.printf("%27s    |%10s            | %10s          | %10s          | %10d       | %10s           | %10d  |\n",
                 this.bookId, this.bookTitle, this.author, this.publisher, this.year, this.description, this.categoryId );
-        System.out.println("                        |-------------------------------------------------------------------------------------------------------------------|");
+        System.out.println("                  |---------------------------------------------------------------------------------------------------------------------------------------|");
 
 
 

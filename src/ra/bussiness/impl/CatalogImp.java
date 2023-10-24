@@ -1,9 +1,8 @@
 package ra.bussiness.impl;
 
-import ra.bussiness.config.DisplayHeader;
+import ra.bussiness.config.Display;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
-import ra.writeRead_File.WriteReadBook;
 import ra.writeRead_File.WriteReadCategory;
 
 import java.util.*;
@@ -37,7 +36,7 @@ public class CatalogImp {
 
     public static void displayCatalog(List<Category> categoryList) {
         // In tiêu đề
-        DisplayHeader.displayHeaderCatalog();
+        Display.displayHeaderCatalog();
         for (Category ct : categoryList) {
             ct.output();
         }
@@ -50,7 +49,8 @@ public class CatalogImp {
                 return o1.getCategoryName().compareTo(o2.getCategoryName());
             }
         });
-        displayCatalog(categoryList);
+        System.out.println("Dưới đây là bảng đã sắp xếp theo tên thể loại.");
+       // displayCatalog(categoryList);
     }
 
     public static void statsCatalog(List<Category> categoryList, List<Book> bookList) {
@@ -66,12 +66,15 @@ public class CatalogImp {
             mapStatsCatalog.put(category.getCategoryName(), count);
         }
 
-        System.out.println("Thống kê thể loại và số sách có trong mỗi thể loại:");
+        Display.displayStatsCatalog(); //displayheader
         for (Category category : categoryList) {
             int categoryId = category.getCategoryId();
             String catalogName = category.getCategoryName();
             int countBook = mapStatsCatalog.get(catalogName);
-            System.out.println("Mã: " + categoryId + " - Tên thể loại: " + catalogName + " - Số sách: " + countBook);
+           // System.out.println("Mã: " + categoryId + " - Tên thể loại: " + catalogName + " - Số sách: " + countBook);
+
+            System.out.printf("%50d             | %20s            |%20s            |\n",categoryId, catalogName, countBook);
+            System.out.println("                                |-------------------------------------------------------------------------------------------------|");
         }
     }
 
@@ -194,10 +197,12 @@ public class CatalogImp {
                         System.err.println("Danh mục này đang chứa sách và không thể xóa.");
                     } else {
                         // Hiển thị thông tin danh mục trước khi xóa
-                        System.out.println("Thông tin danh mục trước khi xóa:");
+                        System.out.println("Thông tin danh mục sẽ bị xóa:");
+                        Display.displayHeaderCatalog();//tieu de
                         categoryToDelete.output();
                         // Yêu cầu xác nhận từ người dùng
-                        System.out.print("Xác nhận xóa danh mục (yes/no): ");
+                        //System.out.print("Xác nhận xóa danh mục (yes/no): ");
+                        Display.displayDelete();
                         String confirm = scanner.nextLine();
 
                         if (confirm.equalsIgnoreCase("yes")) {
