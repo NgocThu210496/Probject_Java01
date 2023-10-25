@@ -47,13 +47,13 @@ public class Library {
 
         Scanner scanner = new Scanner(System.in);
         do {
-            System.out.println("                                                    .==========================================================.");
+            System.out.println(Color.TEXT_YELLOW+"                                                    .==========================================================."+ Color.TEXT_RESET);
             System.out.println(Color.TEXT_YELLOW+"                                                    |                     QUẢN LÝ THƯ VIỆN                     |"+ Color.TEXT_RESET);
-            System.out.println("                                                    |==========================================================|");
-            System.out.println("                                                    |                    1. QUẢN LÝ THỂ LOẠI                   |");
-            System.out.println("                                                    |                    2. QUẢN LÝ SÁCH                       |");
-            System.out.println("                                                    |                    3. THOÁT                              |");
-            System.out.println("                                                    |==========================================================|");
+            System.out.println(Color.TEXT_YELLOW+"                                                    |==========================================================|"+ Color.TEXT_RESET);
+            System.out.println(Color.TEXT_YELLOW+"                                                    |"+ Color.TEXT_RESET+"                    1. QUẢN LÝ THỂ LOẠI"+Color.TEXT_YELLOW+"                   |");
+            System.out.println(Color.TEXT_YELLOW+"                                                    |"+ Color.TEXT_RESET+"                    2. QUẢN LÝ SÁCH"+Color.TEXT_YELLOW+"                       |");
+            System.out.println(Color.TEXT_YELLOW+"                                                    |"+ Color.TEXT_RESET+"                    3. THOÁT"+Color.TEXT_YELLOW+"                              |");
+            System.out.println(Color.TEXT_YELLOW+"                                                    |==========================================================|"+ Color.TEXT_RESET);
             int choice;
                 choice = UserChoice.getUserChoiceMain(scanner);
                 switch (choice) {

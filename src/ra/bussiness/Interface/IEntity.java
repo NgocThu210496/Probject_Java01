@@ -1,5 +1,5 @@
 package ra.bussiness.Interface;
 
-public interface IEntity <T>{
+public interface IEntity{
     void output();
 }

@@ -1,5 +1,6 @@
 package ra.bussiness.impl;
 
+import ra.bussiness.config.Color;
 import ra.bussiness.config.Display;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
@@ -67,7 +68,7 @@ public class BookImp {
                                     for (int j = 0; j < bookList.size(); j++) {
                                         if (i != j && bookList.get(j).getBookTitle().equals(book.getBookTitle())) {
                                             isExist = true;
-                                            System.err.println("Tiêu đề sách đã tồn tại. Vui lòng nhập lại");
+                                            System.out.println(Color.TEXT_RED+"Tiêu đề sách đã tồn tại. Vui lòng nhập lại"+ Color.TEXT_RESET);
                                             break;
                                         }
                                     }
@@ -75,10 +76,10 @@ public class BookImp {
                                         break;
                                     }
                                 } else {
-                                    System.err.println("Tiêu đề sách phải có độ dài từ 6-50 ký tự. Vui lòng nhập lại!");
+                                    System.out.println(Color.TEXT_RED+"Tiêu đề sách phải có độ dài từ 6-50 ký tự. Vui lòng nhập lại!"+Color.TEXT_RESET);
                                 }
                             } else {
-                                System.err.println("Tiêu đề sách không được để trống. Vui lòng nhập lại!");
+                                System.out.println(Color.TEXT_RED+"Tiêu đề sách không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
                             }
                         } while (true);
 
@@ -91,7 +92,7 @@ public class BookImp {
                                 ;
                                 break;
                             } else {
-                                System.err.println("Tên tác giả không được để trống. Vui lòng nhập lại!");
+                                System.out.println(Color.TEXT_RED+"Tên tác giả không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
                             }
                         }
                         while (true);
@@ -103,7 +104,7 @@ public class BookImp {
                                 book.setPublisher(newPublisher);
                                 break;
                             } else {
-                                System.err.println("Nhà xuất bản không được để trống. Vui lòng nhập lại!");
+                                System.out.println(Color.TEXT_RED+"Nhà xuất bản không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
                             }
                         }
                         while (true);
@@ -120,13 +121,13 @@ public class BookImp {
                                         book.setYear(newYear); // Gán năm mới cho sách
                                         break; // năm hợp lệ
                                     } else {
-                                        System.err.println("Năm xuất bản phải từ 1970 trở đi và không lớn hơn năm hiện tại.");
+                                        System.out.println(Color.TEXT_RED+"Năm xuất bản phải từ 1970 trở đi và không lớn hơn năm hiện tại."+Color.TEXT_RESET);
                                     }
                                 } catch (NumberFormatException e) {
-                                    System.err.println("Năm xuất bản phải là một số nguyên.");
+                                    System.out.println(Color.TEXT_RED+"Năm xuất bản phải là một số nguyên."+Color.TEXT_RESET);
                                 }
                             } else {
-                                System.err.println("Năm xuất bản không được để trống. Vui lòng nhập lại!");
+                                System.out.println(Color.TEXT_RED+"Năm xuất bản không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
                             }
                         }
                         while (true);
@@ -138,7 +139,7 @@ public class BookImp {
                                 book.setDescription(newDescription);
                                 break;
                             } else {
-                                System.err.println("Mô tả sách không được để trống. Vui lòng nhập lại!");
+                                System.out.println(Color.TEXT_RED+"Mô tả sách không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
                             }
                         }
                         while (true);
@@ -151,7 +152,7 @@ public class BookImp {
                         int newCategoryIndex = getNewCategoryIndex(scanner, categoryList);
                         // Kiểm tra lựa chọn danh mục mới
                         while (newCategoryIndex == -1) {
-                            System.err.println("Lựa chọn không hợp lệ. Vui lòng nhập lại.");
+                            System.out.println(Color.TEXT_RED+"Lựa chọn không hợp lệ. Vui lòng nhập lại."+Color.TEXT_RESET);
                             newCategoryIndex = getNewCategoryIndex(scanner, categoryList);
                         }
                         int newCategoryId = categoryList.get(newCategoryIndex).getCategoryId();
@@ -162,7 +163,7 @@ public class BookImp {
                     }
                 }
                 if (!found) {
-                    System.err.println("Không tìm thấy mã sách. Vui lòng nhập lại!");
+                    System.out.println(Color.TEXT_RED+"Không tìm thấy mã sách. Vui lòng nhập lại!"+Color.TEXT_RESET);
                 }
                 if (addedSuccessfully) {
                     //ghi danh sach danh muc vao file .txt
@@ -170,17 +171,16 @@ public class BookImp {
                     if (result) {
                         System.out.println("Đã cập nhật danh mục thành công và lưu vào file");
                     } else {
-                        System.err.println("Không thể lưu dữ liệu vào file.");
+                        System.out.println(Color.TEXT_RED+"Không thể lưu dữ liệu vào file."+Color.TEXT_RESET);
                     }
                 }
                 return addedSuccessfully;
             } else {
-                System.err.println("Mã sách không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED+"Mã sách không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
             }
             addedSuccessfully = true;
         } while (true);
     }
-
 
 
     public static void deleteProduct(Scanner scanner, List<Book> bookList, List<Category> categoryList) {
@@ -210,17 +210,17 @@ public class BookImp {
                     deleted = true;
                 }
             } else {
-                System.err.println("Mã sách không tồn tại.");
+                System.out.println(Color.TEXT_RED+"Mã sách không tồn tại."+Color.TEXT_RESET);
             }
         } while (!deleted);
     }
 
     public static void displayBookByCatalory(List<Category> categoryList, List<Book> bookList) {
         for (Category ct : categoryList) {
-            System.out.println("Thể loại: " + ct.getCategoryName() + " gồm các loại sách: ");
+            System.out.println(Color.TEXT_GREEN+"\tThể loại " + ct.getCategoryName() + " gồm các loại sách: " +Color.TEXT_RESET);
             for (Book b : bookList) {
                 if (b.getCategoryId() == ct.getCategoryId()) { //hiển thị sách thuộc thể loại
-                    System.out.println("\t" + b.getBookTitle());
+                    System.out.println("\t\t- " + b.getBookTitle());
                 }
             }
             System.out.println();
@@ -235,10 +235,10 @@ public class BookImp {
             String keyword = scanner.nextLine();
 
             if (keyword.trim().isEmpty()) {
-                System.err.println("Từ khóa tìm kiếm không được để trống. Vui lòng nhập lại.");
+                System.out.println(Color.TEXT_RED+"Từ khóa tìm kiếm không được để trống. Vui lòng nhập lại."+Color.TEXT_RESET);
             } else {
-                System.out.println("Kết quả tìm kiếm cho từ khóa: " + keyword);
-
+                System.out.println("Kết quả tìm kiếm cho từ khóa: '" + keyword + "'");
+                System.out.println();
                 // Duyệt qua danh sách sách
                 for (Book book : bookList) {
                     if (book.getBookTitle().toLowerCase().contains(keyword.toLowerCase()) ||
@@ -253,7 +253,7 @@ public class BookImp {
                     }
                 }
                 if (!found) {
-                    System.err.println("Không tìm thấy kết quả nào cho từ khóa '" + keyword + "'. Vui lòng nhập lại!");
+                    System.out.println(Color.TEXT_RED+"Không tìm thấy kết quả nào cho từ khóa '" + keyword + "'. Vui lòng nhập lại!"+Color.TEXT_RESET);
                 }
             }
         } while (!found);
@@ -262,7 +262,7 @@ public class BookImp {
     private static int getNewCategoryIndex(Scanner scanner, List<Category> categoryList) {
         int newCategoryIndex = -1;
         do {
-            System.out.print("Lựa chọn của bạn: ");
+            System.out.println("Lựa chọn của bạn: ");
             String choiceInput = scanner.nextLine();
             if (!choiceInput.isEmpty()) { // Kiểm tra lựa chọn không trống
                 try {
@@ -271,13 +271,13 @@ public class BookImp {
                         newCategoryIndex = choice - 1;
                         break;
                     } else {
-                        System.err.println("Không tồn tại mã danh mục, vui lòng nhập lại!");
+                        System.out.println(Color.TEXT_RED+"Không tồn tại mã danh mục, vui lòng nhập lại!"+Color.TEXT_RESET);
                     }
                 } catch (NumberFormatException e) {
-                    System.err.println("Lựa chọn phải là một số nguyên. Vui lòng nhập lại!");
+                    System.out.println(Color.TEXT_RED+"Lựa chọn phải là một số nguyên. Vui lòng nhập lại!"+Color.TEXT_RESET);
                 }
             } else {
-                System.err.println("Lựa chọn không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED+"Lựa chọn không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
             }
         } while (newCategoryIndex == -1);
 

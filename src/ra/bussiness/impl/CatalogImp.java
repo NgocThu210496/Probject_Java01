@@ -1,5 +1,6 @@
 package ra.bussiness.impl;
 
+import ra.bussiness.config.Color;
 import ra.bussiness.config.Display;
 import ra.bussiness.entity.Book;
 import ra.bussiness.entity.Category;
@@ -28,7 +29,7 @@ public class CatalogImp {
             if (result) {
                 System.out.println("Đã thêm danh mục thành công và lưu vào file");
             } else {
-                System.err.println("Không thể lưu dữ liệu vào file.");
+                System.out.println(Color.TEXT_RED+"Không thể lưu dữ liệu vào file."+Color.TEXT_RESET);
             }
         }
         return addedSuccessfully;
@@ -51,6 +52,16 @@ public class CatalogImp {
         });
         System.out.println("Dưới đây là bảng đã sắp xếp theo tên thể loại.");
        // displayCatalog(categoryList);
+    }
+    public static void sortCatalogId(List<Category> categoryList,List<Book>bookList) {
+        Collections.sort(categoryList, new Comparator<Category>() {
+            @Override
+            public int compare(Category o1, Category o2) {
+                return o1.getCategoryId() - o2.getCategoryId();
+            }
+        });
+        displayCatalog(categoryList);
+        WriteReadCategory.writeCategoryToFile(categoryList, bookList);
     }
 
     public static void statsCatalog(List<Category> categoryList, List<Book> bookList) {
@@ -94,13 +105,13 @@ public class CatalogImp {
                         }
                     }
                     if (!found) {
-                        System.err.println("Không tìm thấy mã thể loại. Vui lòng nhập lại!");
+                        System.out.println(Color.TEXT_RED+"Không tìm thấy mã thể loại. Vui lòng nhập lại!"+Color.TEXT_RESET);
                     }
                 } catch (NumberFormatException e) {
-                    System.err.println("Mã thể loại phải là một số nguyên. Vui lòng nhập lại!");
+                    System.out.println(Color.TEXT_RED+"Mã thể loại phải là một số nguyên. Vui lòng nhập lại!"+Color.TEXT_RESET);
                 }
             } else {
-                System.err.println("Mã thể loại không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED+"Mã thể loại không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
             }
         } while (!found);
 
@@ -122,7 +133,7 @@ public class CatalogImp {
                             for (int j = 0; j < categoryList.size(); j++) {
                                 if (i != j && categoryList.get(j).getCategoryName().equals(category.getCategoryName())) {
                                     isExist = true;
-                                    System.err.println("Tên thể loại đã tồn tại. Vui lòng nhập lại!");
+                                    System.out.println(Color.TEXT_RED+"Tên thể loại đã tồn tại. Vui lòng nhập lại!"+Color.TEXT_RESET);
                                     break;
                                 }
                             }
@@ -130,10 +141,10 @@ public class CatalogImp {
                                 break;
                             }
                         } else {
-                            System.err.println("Tên danh mục có độ dài từ 6-30 ký tự. Vui lòng nhập lại!");
+                            System.out.println(Color.TEXT_RED+"Tên danh mục có độ dài từ 6-30 ký tự. Vui lòng nhập lại!"+Color.TEXT_RESET);
                         }
                     } else {
-                        System.err.println("Tên danh mục không được để trống. Vui lòng nhập lại!");
+                        System.out.println(Color.TEXT_RED+"Tên danh mục không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
                     }
                 } while (true);
 
@@ -145,10 +156,10 @@ public class CatalogImp {
                             category.setCategoryStatus(Boolean.parseBoolean(statusInput));
                             break;
                         } else {
-                            System.err.println("Trạng thái danh mục chỉ nhận giá trị true hoặc false. Vui lòng nhập lại!");
+                            System.out.println(Color.TEXT_RED+"Trạng thái danh mục chỉ nhận giá trị true hoặc false. Vui lòng nhập lại!"+Color.TEXT_RESET);
                         }
                     } else {
-                        System.err.println("Trạng thái thể loại không được để trống. Vui lòng nhập lại!");
+                        System.out.println(Color.TEXT_RED+"Trạng thái thể loại không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
                     }
                 } while (true);
             }
@@ -160,7 +171,7 @@ public class CatalogImp {
             if (result) {
                 System.out.println("Đã cập nhật danh mục thành công và lưu vào file");
             } else {
-                System.err.println("Không thể lưu dữ liệu vào file.");
+                System.out.println(Color.TEXT_RED+"Không thể lưu dữ liệu vào file."+Color.TEXT_RESET);
             }
         }
         return addedSuccessfully;
@@ -194,7 +205,7 @@ public class CatalogImp {
                     }
                     // Nếu danh mục chứa sách, thông báo và không thực hiện xóa
                     if (isContains) {
-                        System.err.println("Danh mục này đang chứa sách và không thể xóa.");
+                        System.out.println(Color.TEXT_RED+"Danh mục này đang chứa sách và không thể xóa."+Color.TEXT_RESET);
                     } else {
                         // Hiển thị thông tin danh mục trước khi xóa
                         System.out.println("Thông tin danh mục sẽ bị xóa:");
@@ -213,14 +224,14 @@ public class CatalogImp {
                             System.out.println("Hủy xóa danh mục.");
                             validId = true;
                         } else {
-                            System.err.println("Lựa chọn không hợp lệ. Vui lòng nhập 'yes' hoặc 'no'.");
+                            System.out.println(Color.TEXT_RED+"Lựa chọn không hợp lệ. Vui lòng nhập 'yes' hoặc 'no'."+Color.TEXT_RESET);
                         }
                     }
                 } else {
-                    System.err.println("Mã danh mục không tồn tại. Vui lòng nhập lại.");
+                    System.out.println(Color.TEXT_RED+"Mã danh mục không tồn tại. Vui lòng nhập lại."+Color.TEXT_RESET);
                 }
             } catch (NumberFormatException ex) {
-                System.err.println("Mã danh mục phải là một số nguyên. Vui lòng nhập lại.");
+                System.out.println(Color.TEXT_RED+"Mã danh mục phải là một số nguyên. Vui lòng nhập lại."+Color.TEXT_RESET);
             }
         } while (!validId);
 

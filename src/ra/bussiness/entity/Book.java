@@ -153,7 +153,7 @@ public class Book implements IEntity, Serializable {
                 this.author = authorInput;
                 break;// Khi đã nhập đúng giá trị
             } else {
-                System.err.println("Tên tác giả không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED +"Tên tác giả không được để trống. Vui lòng nhập lại!"+ Color.TEXT_RESET);
             }
         }
         while (isExit);
@@ -165,7 +165,7 @@ public class Book implements IEntity, Serializable {
                 this.publisher = publisherInput;
                 break;
             } else {
-                System.err.println("Nhà xuất bản không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED +"Nhà xuất bản không được để trống. Vui lòng nhập lại!"+ Color.TEXT_RESET);
             }
         }
         while (isExit);
@@ -181,13 +181,13 @@ public class Book implements IEntity, Serializable {
                     if (publicationYear.isAfter(Year.of(1970)) && !publicationYear.isAfter(currentYear)) {
                         break;
                     } else {
-                        System.err.println("Năm xuất bản phải từ 1970 trở đi và không lớn hơn năm hiện tại.");
+                        System.out.println(Color.TEXT_RED +"Năm xuất bản phải từ 1970 trở đi và không lớn hơn năm hiện tại."+ Color.TEXT_RESET);
                     }
                 } catch (NumberFormatException e) {
-                    System.err.println("Năm xuất bản phải là một số nguyên.");
+                    System.out.println(Color.TEXT_RED +"Năm xuất bản phải là một số nguyên."+ Color.TEXT_RESET);
                 }
             } else {
-                System.err.println("Năm xuất bản không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED +"Năm xuất bản không được để trống. Vui lòng nhập lại!"+ Color.TEXT_RESET);
             }
         } while (isExit);
 
@@ -198,11 +198,11 @@ public class Book implements IEntity, Serializable {
                 this.description = descriptionInput;
                 break;
             } else {
-                System.err.println("Mô tả sách không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED +"Mô tả sách không được để trống. Vui lòng nhập lại!"+ Color.TEXT_RESET);
             }
         } while (isExit);
 
-        System.out.print("Chọn danh mục của sản phẩm: "); //hiển thị ra các danh mục
+        System.out.println("Chọn danh mục của sản phẩm: "); //hiển thị ra các danh mục
         do {
             for (int i = 0; i < categoryList.size(); i++) {
                 System.out.println(i + 1 + "." + categoryList.get(i).getCategoryName());
@@ -211,18 +211,18 @@ public class Book implements IEntity, Serializable {
             String choiceInput = scanner.nextLine();
             if (!choiceInput.isEmpty()) { // Kiểm tra lựa chọn không trống
                 try {
-                    int choice = Integer.parseInt(choiceInput); //người dùng nhập để chọn một danh mục từ danh sách
+                    int choice = Integer.parseInt(choiceInput); //chọn một danh mục từ danh sách
                     if (choice >= 1 && choice <= categoryList.size()) {
                         this.categoryId = categoryList.get(choice - 1).getCategoryId(); //truy cập phần tử thứ (choice - 1)
                         break;
                     } else {
-                        System.err.println("Không tồn tại mã danh mục, vui lòng nhập lại!");
+                        System.out.println(Color.TEXT_RED +"Không tồn tại mã danh mục, vui lòng nhập lại!"+ Color.TEXT_RESET);
                     }
                 } catch (NumberFormatException e) {
-                    System.err.println("Lựa chọn phải là một số nguyên. Vui lòng nhập lại!");
+                    System.out.println(Color.TEXT_RED +"Lựa chọn phải là một số nguyên. Vui lòng nhập lại!"+ Color.TEXT_RESET);
                 }
             } else {
-                System.err.println("Lựa chọn không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED +"Lựa chọn không được để trống. Vui lòng nhập lại!"+ Color.TEXT_RESET);
             }
 
         } while (isExit);

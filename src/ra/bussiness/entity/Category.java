@@ -63,7 +63,7 @@ public class Category implements IEntity, Serializable {
                         for (Category ct : categoryList) {
                             if (ct.getCategoryId() == this.categoryId) {
                                 isExist = true; //tìm thấy id trùng lặp
-                                System.err.println("Mã thể loại đã tồn tại. Vui lòng nhập lại!");
+                                System.out.println(Color.TEXT_RED+"Mã thể loại đã tồn tại. Vui lòng nhập lại!"+Color.TEXT_RESET);
                                 break;
                             }
                         }
@@ -71,13 +71,13 @@ public class Category implements IEntity, Serializable {
                             break; // Nếu không tìm thấy id trùng lặp, thoát khỏi vòng lặp
                         }
                     } else {
-                        System.err.println("Mã thể loại phải lớn hơn 0. Vui lòng nhập lại!");
+                        System.out.println(Color.TEXT_RED+"Mã thể loại phải lớn hơn 0. Vui lòng nhập lại!"+Color.TEXT_RESET);
                     }
                 }catch (NumberFormatException e){
-                    System.err.println("Mã thể loại phải là số nguyên. Vui lòng nhập lại!");
+                    System.out.println(Color.TEXT_RED+"Mã thể loại phải là số nguyên. Vui lòng nhập lại!"+Color.TEXT_RESET);
                 }
             }else {
-                System.err.println("Mã thể loại không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED+"Mã thể loại không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
             }
 
         } while (isExit);
@@ -93,7 +93,7 @@ public class Category implements IEntity, Serializable {
                     for (int i = 0; i < categoryList.size(); i++) {
                         if (categoryList.get(i).categoryName.equals(getCategoryName())) {
                             isExist = true;
-                            System.err.println("Tên thể loại đã tồn tại. Vui lòng nhập lại!");
+                            System.out.println(Color.TEXT_RED+"Tên thể loại đã tồn tại. Vui lòng nhập lại!"+Color.TEXT_RESET);
                             break;
                         }
                     }
@@ -101,10 +101,10 @@ public class Category implements IEntity, Serializable {
                         break;
                     }
                 } else {
-                    System.err.println("Tên danh mục có độ dài từ 6-30 ký tự. Vui lòng nhập lại!");
+                    System.out.println(Color.TEXT_RED+"Tên danh mục có độ dài từ 6-30 ký tự. Vui lòng nhập lại!"+Color.TEXT_RESET);
                 }
             }else {
-                System.err.println("Tên danh mục không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED+"Tên danh mục không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
             }
         } while (isExit);
 
@@ -116,10 +116,10 @@ public class Category implements IEntity, Serializable {
                     this.categoryStatus=Boolean.parseBoolean(statusInput);
                     break;
                 }else {
-                    System.err.println("Trạng thái danh mục chỉ nhận giá trị true hoặc false. Vui lòng nhập lại!");
+                    System.out.println(Color.TEXT_RED+"Trạng thái danh mục chỉ nhận giá trị true hoặc false. Vui lòng nhập lại!"+Color.TEXT_RESET);
                 }
             }else {
-                System.err.println("Trạng thái thể loại không được để trống. Vui lòng nhập lại!");
+                System.out.println(Color.TEXT_RED+"Trạng thái thể loại không được để trống. Vui lòng nhập lại!"+Color.TEXT_RESET);
             }
 
         }while (isExit);

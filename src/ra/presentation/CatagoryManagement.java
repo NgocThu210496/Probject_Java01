@@ -13,7 +13,8 @@ public class CatagoryManagement {
     public static void showCategoriesMenu(List<Category> categoryList, List<Book> bookList) {
         Scanner scanner = new Scanner(System.in);
         boolean exitMenuCatagory = true;
-        CatalogImp.displayCatalog(categoryList);
+        //CatalogImp.displayCatalog(categoryList);
+        CatalogImp.sortCatalogId(categoryList,bookList);
         do {
 //            for (Category ct : categoryList) {
 //                ct.output();
@@ -37,7 +38,8 @@ public class CatagoryManagement {
                     case 1:
                         System.out.println("1. Thêm mới thể loại");
                         CatalogImp.createCatalog(scanner, categoryList, bookList);
-                        CatalogImp.displayCatalog(categoryList);
+                       CatalogImp.displayCatalog(categoryList);
+
                         break;
                     case 2:
                         System.out.println("2. Hiển thị danh sách theo tên A–Z");

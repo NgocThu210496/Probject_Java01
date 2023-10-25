@@ -13,21 +13,22 @@ public class BookManagement {
     public static void showBooksMenu(List<Category> categoryList, List<Book> bookList) {
         Scanner scanner = new Scanner(System.in);
         boolean exitMenuBook = true;
+        BookImp.displayBook(bookList);
         do {
 //            for (Book b : bookList) {
 //                b.output();
 //            }
-            BookImp.displayBook(bookList);
-            System.out.println(".===========================================================.");
+          //  BookImp.displayBook(bookList);
+            System.out.println(Color.TEXT_BLUE+".===========================================================."+Color.TEXT_RESET);
             System.out.println(Color.TEXT_BLUE+"|                        QUẢN LÝ SÁCH                       |"+Color.TEXT_RESET);
-            System.out.println("|===========================================================|");
+            System.out.println(Color.TEXT_BLUE+"|===========================================================|"+Color.TEXT_RESET);
             System.out.println("|               1. Thêm mới sách                            |");
             System.out.println("|               2. Cập nhật thông tin sách                  |");
             System.out.println("|               3. Xóa sách                                 |");
             System.out.println("|               4. Tìm kiếm sách                            |");
             System.out.println("|               5. Hiển thị danh sách theo nhóm thể loại    |");
             System.out.println("|               6. Quay lại                                 |");
-            System.out.println("|===========================================================|");
+            System.out.println(Color.TEXT_BLUE+"|===========================================================|"+Color.TEXT_RESET);
             int choice;
                 choice = UserChoice.getUserChoice(scanner);
 
@@ -39,10 +40,12 @@ public class BookManagement {
                     case 2:
                         System.out.println("2. Cập nhật thông tin sách");
                         BookImp.updateBook(scanner, categoryList, bookList);
+                       // BookImp.displayBook(bookList);
                         break;
                     case 3:
                         System.out.println("3.Xóa sách");
                         BookImp.deleteProduct(scanner, bookList, categoryList);
+                        BookImp.displayBook(bookList);
                         break;
                     case 4:
                         System.out.println("4. Tìm kiếm sách");

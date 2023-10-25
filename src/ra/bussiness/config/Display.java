@@ -19,10 +19,10 @@ public class Display {
     public static void displayDelete(){
         System.out.println(Color.TEXT_GREEN +"                                                          .---------------------------------------------." + Color.TEXT_RESET);
         System.out.println(Color.TEXT_GREEN +"                                                          |          Bạn có chắc chắn muốn xoá           |" + Color.TEXT_RESET);
-        System.out.println(Color.TEXT_GREEN +"                                                          .---------------------------------------------." + Color.TEXT_RESET);
+        System.out.println(Color.TEXT_GREEN +"                                                           ----------------------------------------------" + Color.TEXT_RESET);
         System.out.println(Color.TEXT_RED + "                                                               .-----------." +"        "+".-----------." +  Color.TEXT_RESET);
         System.out.println(Color.TEXT_RED + "                                                               |    Yes    |" +"        "+"|    No     |"+ Color.TEXT_RESET);
-        System.out.println(Color.TEXT_RED + "                                                                ------------" +"        "+" -----------"+ Color.TEXT_RESET);
+        System.out.println(Color.TEXT_RED + "                                                                ----------- " +"        "+" ----------- "+ Color.TEXT_RESET);
 
     }
 

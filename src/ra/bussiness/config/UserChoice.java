@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class UserChoice {
     public static int getUserChoice(Scanner scanner) {
         int choice = -1; // Giá trị không hợp lệ
-        System.out.print("                                                                      Nhập lựa chọn của bạn: ");
+        System.out.print(Color.TEXT_PURPLE+"Nhập lựa chọn của bạn: "+Color.TEXT_RESET);
         while (choice < 1 || choice > 6) {
             try {
                 String input = "";
@@ -30,7 +30,7 @@ public class UserChoice {
 
     public static int getUserChoiceMain(Scanner scanner) {
         int choice = -1; // Giá trị không hợp lệ
-        System.out.print("                                                                      Nhập lựa chọn của bạn: ");
+        System.out.print(Color.TEXT_PURPLE+"                                                                      Nhập lựa chọn của bạn: "+Color.TEXT_RESET);
         while (choice < 1 || choice > 3) {
             try {
 
