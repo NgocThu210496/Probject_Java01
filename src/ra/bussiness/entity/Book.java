@@ -235,7 +235,7 @@ public class Book implements IEntity, Serializable {
 //        System.out.printf("NXB: %s - Năm xuất bản: %d - Mô tả sách: %s - Danh mục của sản phẩm: %d\n", this.publisher, this.year, this.description, this.categoryId);
 //        System.out.println("-------------------------*-----------------------------");
 
-        System.out.printf("%27s    |%10s            | %10s          | %10s          | %10d       | %10s           | %10d  |\n",
+        System.out.printf("                  |%8s    |%10s            | %10s          | %10s          | %10d       | %10s           | %10d  |\n",
                 this.bookId, this.bookTitle, this.author, this.publisher, this.year, this.description, this.categoryId );
         System.out.println("                  |---------------------------------------------------------------------------------------------------------------------------------------|");
 

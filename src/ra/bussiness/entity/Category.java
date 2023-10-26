@@ -130,7 +130,7 @@ public class Category implements IEntity, Serializable {
 //        System.out.printf("Mã thể loại sách: %d - Tên thể loại: %s - Trạng thái thể loại: %s\n", this.categoryId, this.categoryName, this.categoryStatus ? "Hoạt động" : "Không hoạt động");
 //        System.out.println("-------------------------*-----------------------------");
 
-        System.out.printf("%50d             | %20s            |%20s            |\n",this.categoryId, this.categoryName, this.categoryStatus? "Hoạt động" : "Không hoạt động");
+        System.out.printf("                                |%17d             | %20s            |%20s            |\n",this.categoryId, this.categoryName, this.categoryStatus? "Hoạt động" : "Không hoạt động");
         System.out.println("                                |-------------------------------------------------------------------------------------------------|");
 
     }

@@ -8,6 +8,8 @@ import ra.writeRead_File.WriteReadBook;
 import ra.writeRead_File.WriteReadCategory;
 
 import java.time.Year;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -217,7 +219,7 @@ public class BookImp {
 
     public static void displayBookByCatalory(List<Category> categoryList, List<Book> bookList) {
         for (Category ct : categoryList) {
-            System.out.println(Color.TEXT_GREEN+"\tThể loại " + ct.getCategoryName() + " gồm các loại sách: " +Color.TEXT_RESET);
+            System.out.println(Color.TEXT_GREEN+"\t" + ct.getCategoryName() +Color.TEXT_RESET);
             for (Book b : bookList) {
                 if (b.getCategoryId() == ct.getCategoryId()) { //hiển thị sách thuộc thể loại
                     System.out.println("\t\t- " + b.getBookTitle());
@@ -292,4 +294,6 @@ public class BookImp {
         }
         return -1;
     }
+
+
 }
