@@ -6,6 +6,7 @@ import ultil.ConnectionDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class BookBussiness {
     public static List<Book> getAllBook(){
@@ -26,6 +27,7 @@ public class BookBussiness {
             bookList= new ArrayList<>();
             // duyet tat ca bang ghi
             while (resultSet.next()){
+                // tao doi tuong book de luu
                 Book book = new Book();
                 book.setBookId(resultSet.getString("bookId"));
                 book.setBookName(resultSet.getString("bookName"));
@@ -57,7 +59,7 @@ public class BookBussiness {
             callableStatement.setFloat(3,book.getPrice());
             callableStatement.setString(4,book.getAuthor());
             callableStatement.setBoolean(5,book.isStatus());
-            // dang ky kieu data cho tham so tra ra
+            // dang ky kieu data cho tham so tra ra: k co
             // thuwc hien goi procedure
             int bookId =  callableStatement.executeUpdate();
             System.out.println("Sach vua them: " +bookId);
@@ -106,7 +108,7 @@ public class BookBussiness {
         try {
             // Mở kết nối đến cơ sở dữ liệu
             connection = ConnectionDB.openConnection();
-            callableStatement = connection.prepareCall("call proc_getBookById(?)");
+            callableStatement = connection.prepareCall("{call proc_getBookById(?)}");
             //set gia tri tham so vao
             callableStatement.setString(1, bookId);
             // thuc hien goi procedure
@@ -143,7 +145,7 @@ public class BookBussiness {
         try {
             // Mở kết nối đến cơ sở dữ liệu
             connection = ConnectionDB.openConnection();
-            callableStatement = connection.prepareCall("call proc_deleteBook(?)");
+            callableStatement = connection.prepareCall("{call proc_deleteBook(?)}");
             //set gia tri tham so vao
             callableStatement.setString(1, bookId);
             // thuc hien goi procedure
@@ -169,7 +171,7 @@ public class BookBussiness {
         try {
             // Mở kết nối đến cơ sở dữ liệu
             connection = ConnectionDB.openConnection();
-            callableStatement = connection.prepareCall("call proc_getCntBook(?,?,?)");
+            callableStatement = connection.prepareCall("{call proc_getCntBook(?,?,?)}");
             //set gia tri tham so vao
             callableStatement.setFloat(1, fromPrice);
             callableStatement.setFloat(2, toPrice);
@@ -273,6 +275,36 @@ public class BookBussiness {
         }
 
         return sum;
+    }
+
+    public static void searchNameBook(String bookName_in){
+        Connection connection = null;
+        CallableStatement callableStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = ConnectionDB.openConnection();
+            callableStatement = connection.prepareCall("{call proc_searchName(?)}");
+            // set gia tri cho tham so vao
+            callableStatement.setString(1,bookName_in);
+            // dang ky du lieu cho tham so tra ra: khong co
+            //thuc hien goi procedure va tra ra ket qua
+            resultSet= callableStatement.executeQuery(); // Sử dụng executeQuery() vì stored procedure trả về một tập kết quả dữ liệu
+            //xem  têm sach có tồn tại hay không
+            boolean nameBook = false;
+            // xu ly ket qua resultSet: in ra ten sach
+            while (resultSet.next()){
+                String bookName = resultSet.getString("bookName");
+                System.out.println("Book Name: " + bookName);
+                nameBook = true;
+            }
+            if (!nameBook){
+                System.out.println("Khong co ten sach nay, vui long nhap lai!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            ConnectionDB.closeConnection(connection,callableStatement);
+        }
     }
 
 }

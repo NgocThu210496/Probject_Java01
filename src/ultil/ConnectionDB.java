@@ -17,9 +17,9 @@ public class ConnectionDB {
         Connection connection = null;
         //cai dat diver manager
         try {
-            //1. set driver lam viec voi CSDL
+            //1. set driver lam viec voi CSDL de ket noi
             Class.forName(DRIVER);
-            //2.khoi tao doi tuong connection de lam viec voi database
+            //2.khoi tao doi tuong connection tu driver managenment de lam viec voi database
             connection = DriverManager.getConnection(URL,USER,PASS);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -46,4 +46,14 @@ public class ConnectionDB {
         }
 
     }
+
+   // test xong bo nha!!!!
+//    public static void main(String[] args) {
+//        Connection connection = openConnection();
+//        if(connection!=null){
+//            System.out.println("ket noi thanh cong");
+//        }else {
+//            System.out.println("ket noi that bai!");
+//        }
+//    }
 }

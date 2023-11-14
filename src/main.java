@@ -5,6 +5,7 @@ import java.awt.datatransfer.FlavorEvent;
 import java.util.List;
 import java.util.Scanner;
 
+import static bussiness.BookBussiness.searchNameBook;
 import static bussiness.BookBussiness.sortPriceByPrice;
 
 public class main {
@@ -42,7 +43,7 @@ public class main {
                     sortByPriceDESC();
                     break;
                 case 6:
-
+                    searchName(scanner);
                     break;
                 case 7:
                     getCntBookByPrice(scanner);
@@ -146,6 +147,12 @@ public class main {
     public static void sumBookByPrice(){
         float sum = BookBussiness.sumPrice();
         System.out.println("Tổng giá của sách: " + sum);
+    }
+
+    public static void searchName(Scanner scanner){
+        System.out.println("Nhap vao ten sach can tim: ");
+        String search = scanner.nextLine();
+        BookBussiness.searchNameBook(search);
     }
 
 }
